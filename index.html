@@ -6,7 +6,7 @@
 <title>Simulador LG Giant C</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@700&family=DM+Sans:wght@400;500;600;700&display=swap');
-:root{--bg:#0d0d12;--text:#f0f0f5;--dim:#b0b0c0;--card:#1a1a25;--border:#333345;--accent:#ff4136;--green:#2ecc40;--blue:#4a9eff;--warn:#f4a623;--led:#ff2a1a;--glow:rgba(255,42,26,.35);--panel:#f7f3ee;--panel2:#eae5de;--pbord:#c8c2b8}
+:root{--bg:#0d0d12;--text:#f0f0f5;--dim:#b0b0c0;--card:#1a1a25;--border:#333345;--accent:#ff4136;--green:#2ecc40;--blue:#4a9eff;--warn:#f4a623;--led:#44ee55;--glow:rgba(68,238,85,.35);--panel:#f7f3ee;--panel2:#eae5de;--pbord:#c8c2b8}
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;font-size:16px}
 .app{max-width:860px;margin:0 auto;padding:12px;display:flex;flex-direction:column;gap:14px}
@@ -22,7 +22,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
 .gt{font-size:1.25rem;font-weight:700;color:#fff;margin-bottom:10px;line-height:1.3}
 .gd{font-size:1rem;color:var(--dim);line-height:1.7;margin-bottom:14px}
 .gd b{color:#fff}
-.gd code{background:#2a2a3a;padding:2px 8px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:.95rem;color:var(--led)}
+.gd code{background:#2a2a3a;padding:2px 8px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:.95rem;color:#44ee55}
 .ga{display:flex;align-items:center;gap:10px;padding:14px 18px;border-radius:10px;font-size:1rem;font-weight:700;background:rgba(255,65,54,.1);border:2px solid rgba(255,65,54,.25);color:var(--accent)}
 .ga.gr{background:rgba(46,204,64,.1);border-color:rgba(46,204,64,.25);color:var(--green)}
 .ga.wr{background:rgba(244,166,35,.1);border-color:rgba(244,166,35,.25);color:var(--warn)}
@@ -150,22 +150,22 @@ const T=[
 {t:'Confirmar PAY ✓',d:'O display mostra <code>PAY</code>. Pressione <b>Iniciar</b> para salvar.',a:'Pressione <b>Iniciar</b> (OK) para salvar',at:'green',hl:['start'],td:'✓ PAY'},
 ]},
 {id:'uend',label:'Seção 2: Coin',steps:[
-{t:'Navegar até UEnd',d:'Voltamos ao submenu <code>t4PE</code>. Navegue até <code>UEnd</code>.',a:'Pressione <b>Morno</b> (▲) até aparecer <b>UEnd</b>',at:'',hl:['warm'],td:'UEnd',sd:'Pdtd'},
-{t:'Entrar em UEnd',d:'O display mostra <code>UEnd</code> (Tipo de Venda). Pressione <b>Iniciar</b>.',a:'Pressione <b>Iniciar</b> (OK)',at:'green',hl:['start'],td:'CArd'},
+{t:'Passar por Pdtd',d:'Configuração PAY salva! Continuamos dentro de <code>t4PE</code>. O display mostra <code>Pdtd</code> (já configurado). Avance até <code>UEnd</code>.',a:'Pressione <b>Morno</b> (▲) para avançar',at:'',hl:['warm'],td:'Loc1',sd:'Pdtd'},
+{t:'Passar por Loc1',d:'O display mostra <code>Loc1</code> (Tipo de unidade monetária). Não é este. Continue avançando.',a:'Pressione <b>Morno</b> (▲) para avançar',at:'',hl:['warm'],td:'UEnd'},
+{t:'Encontramos UEnd!',d:'O display mostra <code>UEnd</code> (Tipo de Venda). <b>Este é o menu correto!</b> Pressione <b>Iniciar</b> para entrar.',a:'Pressione <b>Iniciar</b> (OK) para entrar',at:'green',hl:['start'],td:'CArd'},
 {t:'Selecionar Coin',d:'O display mostra <code>CArd</code> (Cartão). Pressione <b>Morno</b> para mudar para <code>CoIn</code>.',a:'Pressione <b>Morno</b> (▲) para selecionar <b>CoIn</b> (Moeda)',at:'',hl:['warm'],td:'CoIn'},
 {t:'Confirmar Coin ✓',d:'O display mostra <code>CoIn</code>. Pressione <b>Iniciar</b> para salvar.',a:'Pressione <b>Iniciar</b> (OK) para salvar',at:'green',hl:['start'],td:'✓ CoIn'},
 ]},
 {id:'co1',label:'Seção 3: Valor',steps:[
-{t:'Navegar até Co1',d:'Estamos no submenu 5tUP (<code>r9Pr</code>). Pressione <b>Morno</b> ou <b>Frio</b> várias vezes até encontrar <code>Co1</code>.',a:'Pressione <b>Morno</b> (▲) até aparecer <b>Co1</b>',at:'',hl:['warm'],td:'Co1',sd:'r9Pr'},
+{t:'Voltar ao menu 5tUP',d:'Configuração CoIn salva! Pressione <b>Quente</b> (Voltar) para sair do t4PE e voltar ao menu 5tUP. Os itens <code>t4PE</code>, <code>Co1</code> e <code>r9Pr</code> estão todos neste mesmo nível.',a:'Pressione <b>Quente</b> (← Voltar)',at:'',hl:['hot'],td:'t4PE',sd:'UEnd'},
+{t:'Navegar até Co1',d:'Estamos no menu 5tUP (Setup). Pressione <b>Morno</b> ou <b>Frio</b> várias vezes até encontrar <code>Co1</code>.',a:'Pressione <b>Morno</b> (▲) até aparecer <b>Co1</b>',at:'',hl:['warm'],td:'Co1'},
 {t:'Entrar em Co1',d:'O display mostra <code>Co1</code> (Valor da moeda). Pressione <b>Iniciar</b> para ver o valor atual.',a:'Pressione <b>Iniciar</b> (OK)',at:'green',hl:['start'],td:'0100'},
 {t:'Ajustar para 1000',d:'Use <b>Morno</b> (▲) para aumentar até <code>1000</code> (= R$10,00). Na simulação, cada clique pula alguns valores.',a:'Pressione <b>Morno</b> (▲) até mostrar <b>1000</b>',at:'',hl:['warm'],td:'1000',mp:{b:'warm',n:5,s:['0200','0400','0600','0800','1000']}},
 {t:'Confirmar valor ✓',d:'O display mostra <code>1000</code> (R$10,00). Pressione <b>Iniciar</b> para salvar.',a:'Pressione <b>Iniciar</b> (OK) para salvar',at:'green',hl:['start'],td:'✓ 1000'},
 ]},
 {id:'exit',label:'Sair do Modo de Configuração',steps:[
-{t:'Voltar ao menu anterior',d:'Valor salvo! Agora precisamos sair. Pressione <b>Quente</b> (Voltar).',a:'Pressione <b>Quente</b> (← Voltar)',at:'',hl:['hot'],td:'Co1',sd:'P1Po'},
-{t:'Continuar voltando',d:'Continue pressionando <b>Quente</b> (Voltar) para sair dos submenus.',a:'Pressione <b>Quente</b> (← Voltar)',at:'',hl:['hot'],td:'r9Pr'},
-{t:'Voltar mais um nível',d:'Estamos em <code>r9Pr</code>. Continue pressionando <b>Quente</b> (Voltar).',a:'Pressione <b>Quente</b> (← Voltar)',at:'',hl:['hot'],td:'5tUP'},
-{t:'Sair do modo de configuração',d:'Estamos em <code>5tUP</code>. Pressione <b>Quente</b> (Voltar) mais uma vez para sair.',a:'Pressione <b>Quente</b> (← Voltar) para sair',at:'',hl:['hot'],td:'PUSH'},
+{t:'Voltar ao menu 5tUP',d:'Valor salvo! O display mostra <code>P1Po</code> (próximo item do menu). Pressione <b>Quente</b> (Voltar) para voltar ao menu 5tUP.',a:'Pressione <b>Quente</b> (← Voltar)',at:'',hl:['hot'],td:'5tUP',sd:'P1Po'},
+{t:'Sair do modo de configuração',d:'Estamos em <code>5tUP</code>. Pressione <b>Quente</b> (Voltar) para sair completamente. A máquina volta ao modo de espera.',a:'Pressione <b>Quente</b> (← Voltar) para sair',at:'',hl:['hot'],td:'PUSH'},
 ]},
 ];
 let cT=0,cS=0,disp='PUSH',pC=0,done=new Set(),allDone=false;
@@ -199,8 +199,8 @@ const SEG_MAP={
 };
 
 function segSVG(text, isOk) {
-  const on = isOk ? '#22dd44' : '#ff2a1a';
-  const off = isOk ? '#0a1a0a' : '#1c0606';
+  const on = isOk ? '#22dd44' : '#44ee55';
+  const off = isOk ? '#0a1a0a' : '#0a1a0a';
   const chars = text.split('');
   const cw = 26, ch = 44, gap = 16, sk = 4, tw = 4.5;
   const totalW = chars.length * (cw + gap) + sk + 6;
