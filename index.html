@@ -113,6 +113,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
 .hb{width:100%;padding:16px;background:linear-gradient(135deg,var(--warn),#e6950a);border:none;border-radius:10px;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:1rem;font-weight:700;color:#fff;animation:hw 1.2s ease-in-out infinite}
 .hb:active{filter:brightness(.9);transform:scale(.97)}
 
+
 /* Flash feedback */
 @keyframes flash{0%{opacity:1}50%{opacity:.3}100%{opacity:1}}
 .flash{animation:flash .2s ease-out}
@@ -137,8 +138,8 @@ const T=[
 {t:'Entrar no Modo de Configuração',d:'A máquina está em espera. Precisamos entrar no modo de configuração.',a:'Segure <b>Quente (1º)</b> + <b>Frio (3º)</b> por 5 segundos',at:'warn',hl:['hot','cold'],hold:true,td:'00:00'},
 {t:'Selecionar código 03',d:'O display mostra <code>00:00</code>. Pressione o botão <b>Morno</b> para avançar até <code>03</code>.',a:'Pressione <b>Morno</b> (▲ Subir) 3 vezes',at:'',hl:['warm'],td:'03',mp:{b:'warm',n:3,s:['01','02','03']}},
 {t:'Confirmar entrada',d:'O display mostra <code>03</code>. Pressione <b>Iniciar</b> para entrar no modo de configuração.',a:'Pressione <b>Iniciar</b> (OK)',at:'green',hl:['start'],td:'L9CI'},
-{t:'Ir para o menu EE5t',d:'Você entrou no modo de configuração (<code>L9CI</code>). <b>⚠ NÃO aperte Iniciar aqui!</b> Pressione <b>Quente</b> (Voltar).',a:'Pressione <b>Quente</b> (← Voltar)',at:'',hl:['hot'],td:'EE5t'},
-{t:'Ir para o menu 5tUP',d:'O display mostra <code>EE5t</code>. Pressione <b>Morno</b> para ir ao menu de configurações.',a:'Pressione <b>Morno</b> (▲ Subir)',at:'',hl:['warm'],td:'5tUP'},
+{t:'Ir para o menu tE5t',d:'Você entrou no modo de configuração (<code>L9CI</code>). <b>⚠ NÃO aperte Iniciar aqui!</b> Pressione <b>Quente</b> (Voltar).',a:'Pressione <b>Quente</b> (← Voltar)',at:'',hl:['hot'],td:'tE5t'},
+{t:'Ir para o menu 5tUP',d:'O display mostra <code>tE5t</code>. Pressione <b>Morno</b> para ir ao menu de configurações.',a:'Pressione <b>Morno</b> (▲ Subir)',at:'',hl:['warm'],td:'5tUP'},
 {t:'Entrar no menu 5tUP',d:'O display mostra <code>5tUP</code>. Pressione <b>Iniciar</b> para entrar.',a:'Pressione <b>Iniciar</b> (OK)',at:'green',hl:['start'],td:'r9Pr'},
 ]},
 {id:'pdtd',label:'Seção 1: PAY',steps:[
@@ -170,6 +171,8 @@ const T=[
 let cT=0,cS=0,disp='PUSH',pC=0,done=new Set(),allDone=false;
 function gs(){return allDone?null:T[cT]?.steps[cS]||null}
 function vib(ms){try{navigator.vibrate&&navigator.vibrate(ms||30)}catch(e){}}
+
+
 function adv(){vib(50);const t=T[cT];if(cS<t.steps.length-1){cS++;pC=0;const n=gs();if(n?.sd)disp=n.sd}else{done.add(cT);if(cT<T.length-1){cT++;cS=0;pC=0;const n=gs();if(n?.sd)disp=n.sd}else{allDone=true;disp='PUSH';vib([50,50,100])}}render()}
 function hBtn(id){const s=gs();if(!s||s.hold)return;vib(20);if(s.mp){if(id===s.mp.b){if(pC<s.mp.n-1){disp=s.mp.s[pC];pC++;render();return}else{disp=s.mp.s[s.mp.n-1];pC=0;adv();return}}return}if(!s.hl?.includes(id))return;disp=s.td;adv()}
 function hHold(){const s=gs();if(!s?.hold)return;vib([30,30,30,30,100]);disp=s.td;adv()}
