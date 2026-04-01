@@ -252,11 +252,9 @@ function render(){
 const s=gs(),prog=allDone?100:(dneS()/totS())*100,isOk=disp.startsWith('✓'),val=isOk?disp.slice(2):disp;
 document.getElementById('app').innerHTML=`
 
-<!-- GUIDE ON TOP -->
+<!-- COMPACT INSTRUCTION ON TOP -->
 <div class="guide-top">
-<div class="tabs">${T.map((t,i)=>{let c='tab';if(done.has(i))c+=' dn';else if(i===cT&&!allDone)c+=' ac';return`<button class="${c}" onclick="selT(${i})">${done.has(i)?'✓ ':''}${t.label}</button>`}).join('')}</div>
 <div class="gc">${allDone?`<div class="cmp"><div class="ic">✅</div><h2>Configuração Completa!</h2><p>As 3 configurações foram realizadas com sucesso:<br><b>Pdtd = PAY</b> · <b>UEnd = Coin</b> · <b>Co1 = 1000 (R$10,00)</b></p><button class="rb" onclick="reset()">Recomeçar Tutorial</button></div>`:s?`<div class="gn">${T[cT].label} — Passo ${cS+1} de ${T[cT].steps.length}</div><div class="gt">${s.t}</div><div class="gd">${s.d}</div><div class="ga ${s.at==='green'?'gr':s.at==='warn'?'wr':''}"><span class="arrow">👆</span><span>${s.a}</span></div>`:''}</div>
-<div class="pb"><div class="pf" style="width:${prog}%"></div></div>
 </div>
 
 <!-- MACHINE PANEL BELOW -->
