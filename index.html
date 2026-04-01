@@ -102,37 +102,37 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
 <script>
 const T=[
 {id:'entry',label:'Entrar no Modo',steps:[
-{t:'Entrar no Modo de ConfiguraÃ§Ã£o',d:'A mÃ¡quina estÃ¡ em espera. Precisamos entrar no modo de configuraÃ§Ã£o (SVC).',a:'Segure <b>1Âº botÃ£o (Hot)</b> + <b>3Âº botÃ£o (Cold)</b> por 5 segundos',at:'warn',hl:['hot','cold'],hold:true,td:'00:00'},
-{t:'Selecionar cÃ³digo 03',d:'O display mostra <code>00:00</code>. Pressione Warm (â² Subir) para avanÃ§ar atÃ© <code>03</code>.',a:'Pressione <b>Warm</b> (â² Subir) 3 vezes',at:'',hl:['warm'],td:'03',mp:{b:'warm',n:3,s:['01','02','03']}},
-{t:'Confirmar entrada',d:'O display mostra <code>03</code>. Pressione Start para entrar no modo de configuraÃ§Ã£o.',a:'Pressione <b>Start</b> (OK)',at:'green',hl:['start'],td:'L9CI'},
-{t:'Navegar para tESt',d:'VocÃª entrou no modo SVC (<code>L9CI</code>). <b>â  NÃO aperte Start aqui!</b> Pressione Hot (Voltar).',a:'Pressione <b>Hot</b> (â Voltar)',at:'',hl:['hot'],td:'tESt'},
-{t:'Navegar para SEtUP',d:'O display mostra <code>tESt</code>. Pressione Warm para ir ao menu de configuraÃ§Ãµes.',a:'Pressione <b>Warm</b> (â² Subir)',at:'',hl:['warm'],td:'SEtUP'},
+{t:'Entrar no Modo de Configuração',d:'A máquina está em espera. Precisamos entrar no modo de configuração (SVC).',a:'Segure <b>1º botão (Hot)</b> + <b>3º botão (Cold)</b> por 5 segundos',at:'warn',hl:['hot','cold'],hold:true,td:'00:00'},
+{t:'Selecionar código 03',d:'O display mostra <code>00:00</code>. Pressione Warm (▲ Subir) para avançar até <code>03</code>.',a:'Pressione <b>Warm</b> (▲ Subir) 3 vezes',at:'',hl:['warm'],td:'03',mp:{b:'warm',n:3,s:['01','02','03']}},
+{t:'Confirmar entrada',d:'O display mostra <code>03</code>. Pressione Start para entrar no modo de configuração.',a:'Pressione <b>Start</b> (OK)',at:'green',hl:['start'],td:'L9CI'},
+{t:'Navegar para tESt',d:'Você entrou no modo SVC (<code>L9CI</code>). <b>⚠ NÃO aperte Start aqui!</b> Pressione Hot (Voltar).',a:'Pressione <b>Hot</b> (← Voltar)',at:'',hl:['hot'],td:'tESt'},
+{t:'Navegar para SEtUP',d:'O display mostra <code>tESt</code>. Pressione Warm para ir ao menu de configurações.',a:'Pressione <b>Warm</b> (▲ Subir)',at:'',hl:['warm'],td:'SEtUP'},
 {t:'Entrar em SEtUP',d:'O display mostra <code>SEtUP</code>. Pressione Start para entrar.',a:'Pressione <b>Start</b> (OK)',at:'green',hl:['start'],td:'F9Pr'},
 ]},
-{id:'pdtd',label:'SeÃ§Ã£o 1: PAY',steps:[
-{t:'Navegar atÃ© tYPE',d:'Estamos no submenu (<code>F9Pr</code>). Pressione Warm ou Cold vÃ¡rias vezes atÃ© encontrar <code>tYPE</code>.',a:'Pressione <b>Warm</b> (â²) atÃ© aparecer <b>tYPE</b>',at:'',hl:['warm'],td:'tYPE'},
+{id:'pdtd',label:'Seção 1: PAY',steps:[
+{t:'Navegar até tYPE',d:'Estamos no submenu (<code>F9Pr</code>). Pressione Warm ou Cold várias vezes até encontrar <code>tYPE</code>.',a:'Pressione <b>Warm</b> (▲) até aparecer <b>tYPE</b>',at:'',hl:['warm'],td:'tYPE'},
 {t:'Entrar em tYPE',d:'O display mostra <code>tYPE</code>. Pressione Start para entrar.',a:'Pressione <b>Start</b> (OK)',at:'green',hl:['start'],td:'Pdtd'},
 {t:'Abrir Pdtd',d:'O display mostra <code>Pdtd</code> (Tipo de Produto). Pressione Start para ver o valor atual.',a:'Pressione <b>Start</b> (OK)',at:'green',hl:['start'],td:'FrEE'},
-{t:'Selecionar PAY',d:'O display mostra <code>FrEE</code> (gratuito). Pressione Warm para alternar para <code>PAY</code>.',a:'Pressione <b>Warm</b> (â²) para selecionar <b>PAY</b>',at:'',hl:['warm'],td:'PAY'},
-{t:'Confirmar PAY â',d:'O display mostra <code>PAY</code>. Pressione Start para salvar.',a:'Pressione <b>Start</b> (OK) para salvar',at:'green',hl:['start'],td:'â PAY'},
+{t:'Selecionar PAY',d:'O display mostra <code>FrEE</code> (gratuito). Pressione Warm para alternar para <code>PAY</code>.',a:'Pressione <b>Warm</b> (▲) para selecionar <b>PAY</b>',at:'',hl:['warm'],td:'PAY'},
+{t:'Confirmar PAY ✓',d:'O display mostra <code>PAY</code>. Pressione Start para salvar.',a:'Pressione <b>Start</b> (OK) para salvar',at:'green',hl:['start'],td:'✓ PAY'},
 ]},
-{id:'uend',label:'SeÃ§Ã£o 2: Coin',steps:[
-{t:'Navegar atÃ© UEnd',d:'Voltamos ao submenu <code>tYPE</code>. Navegue atÃ© <code>UEnd</code>.',a:'Pressione <b>Warm</b> (â²) atÃ© aparecer <b>UEnd</b>',at:'',hl:['warm'],td:'UEnd',sd:'Pdtd'},
+{id:'uend',label:'Seção 2: Coin',steps:[
+{t:'Navegar até UEnd',d:'Voltamos ao submenu <code>tYPE</code>. Navegue até <code>UEnd</code>.',a:'Pressione <b>Warm</b> (▲) até aparecer <b>UEnd</b>',at:'',hl:['warm'],td:'UEnd',sd:'Pdtd'},
 {t:'Entrar em UEnd',d:'O display mostra <code>UEnd</code> (Tipo de Venda). Pressione Start.',a:'Pressione <b>Start</b> (OK)',at:'green',hl:['start'],td:'CRrd'},
-{t:'Selecionar Coin',d:'O display mostra <code>CRrd</code> (CartÃ£o). Pressione Warm para alternar para <code>Coin</code>.',a:'Pressione <b>Warm</b> (â²) para selecionar <b>Coin</b>',at:'',hl:['warm'],td:'Coin'},
-{t:'Confirmar Coin â',d:'O display mostra <code>Coin</code>. Pressione Start para salvar.',a:'Pressione <b>Start</b> (OK) para salvar',at:'green',hl:['start'],td:'â Coin'},
+{t:'Selecionar Coin',d:'O display mostra <code>CRrd</code> (Cartão). Pressione Warm para alternar para <code>Coin</code>.',a:'Pressione <b>Warm</b> (▲) para selecionar <b>Coin</b>',at:'',hl:['warm'],td:'Coin'},
+{t:'Confirmar Coin ✓',d:'O display mostra <code>Coin</code>. Pressione Start para salvar.',a:'Pressione <b>Start</b> (OK) para salvar',at:'green',hl:['start'],td:'✓ Coin'},
 ]},
-{id:'co1',label:'SeÃ§Ã£o 3: Valor',steps:[
-{t:'Navegar atÃ© Co1',d:'Estamos no submenu SEtUP (<code>F9Pr</code>). Pressione Warm ou Cold vÃ¡rias vezes atÃ© encontrar <code>Co1</code>.',a:'Pressione <b>Warm</b> (â²) atÃ© aparecer <b>Co1</b>',at:'',hl:['warm'],td:'Co1',sd:'F9Pr'},
+{id:'co1',label:'Seção 3: Valor',steps:[
+{t:'Navegar até Co1',d:'Estamos no submenu SEtUP (<code>F9Pr</code>). Pressione Warm ou Cold várias vezes até encontrar <code>Co1</code>.',a:'Pressione <b>Warm</b> (▲) até aparecer <b>Co1</b>',at:'',hl:['warm'],td:'Co1',sd:'F9Pr'},
 {t:'Entrar em Co1',d:'O display mostra <code>Co1</code> (Valor da moeda 1). Pressione Start para ver o valor atual.',a:'Pressione <b>Start</b> (OK)',at:'green',hl:['start'],td:'0100'},
-{t:'Ajustar para 1000',d:'Use Warm (â²) para aumentar atÃ© <code>1000</code> (= R$10,00). Na simulaÃ§Ã£o, cada clique pula alguns valores para agilizar.',a:'Pressione <b>Warm</b> (â²) atÃ© mostrar <b>1000</b>',at:'',hl:['warm'],td:'1000',mp:{b:'warm',n:5,s:['0200','0400','0600','0800','1000']}},
-{t:'Confirmar valor â',d:'O display mostra <code>1000</code> (R$10,00). Pressione Start para salvar.',a:'Pressione <b>Start</b> (OK) para salvar',at:'green',hl:['start'],td:'â 1000'},
+{t:'Ajustar para 1000',d:'Use Warm (▲) para aumentar até <code>1000</code> (= R$10,00). Na simulação, cada clique pula alguns valores para agilizar.',a:'Pressione <b>Warm</b> (▲) até mostrar <b>1000</b>',at:'',hl:['warm'],td:'1000',mp:{b:'warm',n:5,s:['0200','0400','0600','0800','1000']}},
+{t:'Confirmar valor ✓',d:'O display mostra <code>1000</code> (R$10,00). Pressione Start para salvar.',a:'Pressione <b>Start</b> (OK) para salvar',at:'green',hl:['start'],td:'✓ 1000'},
 ]},
 {id:'exit',label:'Sair do Modo',steps:[
-{t:'Voltar ao menu anterior',d:'Valor salvo! Agora precisamos sair do modo de configuraÃ§Ã£o. Pressione Hot (Voltar) para retornar ao menu anterior.',a:'Pressione <b>Hot</b> (â Voltar)',at:'',hl:['hot'],td:'Co1',sd:'P1Po'},
-{t:'Continuar voltando',d:'Continue pressionando Hot (Voltar) para ir saindo dos submenus.',a:'Pressione <b>Hot</b> (â Voltar)',at:'',hl:['hot'],td:'F9Pr'},
-{t:'Voltar mais um nÃ­vel',d:'Estamos em <code>F9Pr</code>. Continue pressionando Hot (Voltar).',a:'Pressione <b>Hot</b> (â Voltar)',at:'',hl:['hot'],td:'SEtUP'},
-{t:'Sair do modo de configuraÃ§Ã£o',d:'Estamos em <code>SEtUP</code>. Pressione Hot (Voltar) mais uma vez para sair completamente.',a:'Pressione <b>Hot</b> (â Voltar) para sair',at:'',hl:['hot'],td:'PUSH'},
+{t:'Voltar ao menu anterior',d:'Valor salvo! Agora precisamos sair do modo de configuração. Pressione Hot (Voltar) para retornar ao menu anterior.',a:'Pressione <b>Hot</b> (← Voltar)',at:'',hl:['hot'],td:'Co1',sd:'P1Po'},
+{t:'Continuar voltando',d:'Continue pressionando Hot (Voltar) para ir saindo dos submenus.',a:'Pressione <b>Hot</b> (← Voltar)',at:'',hl:['hot'],td:'F9Pr'},
+{t:'Voltar mais um nível',d:'Estamos em <code>F9Pr</code>. Continue pressionando Hot (Voltar).',a:'Pressione <b>Hot</b> (← Voltar)',at:'',hl:['hot'],td:'SEtUP'},
+{t:'Sair do modo de configuração',d:'Estamos em <code>SEtUP</code>. Pressione Hot (Voltar) mais uma vez para sair completamente.',a:'Pressione <b>Hot</b> (← Voltar) para sair',at:'',hl:['hot'],td:'PUSH'},
 ]},
 ];
 let cT=0,cS=0,disp='PUSH',pC=0,done=new Set(),allDone=false;
@@ -160,7 +160,7 @@ const SEG_MAP={
 'L':'def','l':'def','N':'abcef','n':'ceg','O':'abcdef','o':'cdeg','P':'abefg','p':'abefg',
 'Q':'abcfg','q':'abcfg','R':'eg','r':'eg','S':'acdfg','s':'acdfg','T':'defg','t':'defg',
 'U':'bcdef','u':'cde','V':'bcdef','v':'cde','Y':'bcdfg','y':'bcdfg','-':'g','_':'d',
-' ':'','.':'dp',':':'co','â':'abcfg'
+' ':'','.':'dp',':':'co','✓':'abcfg'
 };
 
 function segSVG(text, isOk) {
@@ -216,17 +216,17 @@ function segSVG(text, isOk) {
 }
 
 function render(){
-const s=gs(),prog=allDone?100:(dneS()/totS())*100,isOk=disp.startsWith('â'),val=isOk?disp.slice(2):disp;
+const s=gs(),prog=allDone?100:(dneS()/totS())*100,isOk=disp.startsWith('✓'),val=isOk?disp.slice(2):disp;
 document.getElementById('app').innerHTML=`
-<div class="hdr"><h1>Simulador de ConfiguraÃ§Ã£o â LG Giant C</h1><p>Clique nos botÃµes destacados do painel para seguir o passo a passo</p></div>
-<div class="mw"><div class="ml">Painel de Controle â LG Giant C (CWG27MDCRS)</div>
+<div class="hdr"><h1>Simulador de Configuração — LG Giant C</h1><p>Clique nos botões destacados do painel para seguir o passo a passo</p></div>
+<div class="mw"><div class="ml">Painel de Controle — LG Giant C (CWG27MDCRS)</div>
 <div class="pnl">
 <div class="pl"><div class="plt">Processing</div>
 <div class="pr">
 <div class="pg">${WI}<div class="plds"><div class="pld"></div><div class="pld"></div></div><div class="plbl">Wash</div></div>
-<div class="parr">âº</div>
+<div class="parr">►</div>
 <div class="pg">${WI}<div class="plds"><div class="pld"></div><div class="pld"></div></div><div class="plbl">Rinse</div></div>
-<div class="parr">âº</div>
+<div class="parr">►</div>
 <div class="pg">${WI}<div class="plds"><div class="pld"></div><div class="pld"></div></div><div class="plbl">Spin</div></div>
 </div></div>
 
@@ -238,23 +238,23 @@ document.getElementById('app').innerHTML=`
 </div>
 
 <div class="prr">
-<div class="bg"><div class="bgt">BotÃ£o de ciclo</div>
-<button class="cb ${hl('hot')}" onclick="hBtn('hot')"><div class="bb"></div><div class="bls"><div class="bm">Quente <span>(Hot)</span></div><div class="bs">1Âº BotÃ£o <span class="ft bk">â VOLTAR</span></div></div><div class="ba">â²</div></button>
-<button class="cb ${hl('warm')}" onclick="hBtn('warm')"><div class="bb"></div><div class="bls"><div class="bm">Morno <span>(Warm)</span></div><div class="bs">2Âº BotÃ£o <span class="ft up">â² SUBIR</span></div></div><div class="ba">â¼</div></button>
-<button class="cb ${hl('cold')}" onclick="hBtn('cold')"><div class="bb"></div><div class="bls"><div class="bm">Frio <span>(Cold)</span></div><div class="bs">3Âº BotÃ£o <span class="ft dn">â¼ DESCER</span></div></div></button>
-<button class="cb dis"><div class="bb"></div><div class="bls"><div class="bm">Delicados <span>(Delicates)</span></div><div class="bs">4Âº BotÃ£o</div></div></button>
+<div class="bg"><div class="bgt">Botão de ciclo</div>
+<button class="cb ${hl('hot')}" onclick="hBtn('hot')"><div class="bb"></div><div class="bls"><div class="bm">Quente <span>(Hot)</span></div><div class="bs">1º Botão <span class="ft bk">← VOLTAR</span></div></div><div class="ba">▲</div></button>
+<button class="cb ${hl('warm')}" onclick="hBtn('warm')"><div class="bb"></div><div class="bls"><div class="bm">Morno <span>(Warm)</span></div><div class="bs">2º Botão <span class="ft up">▲ SUBIR</span></div></div><div class="ba">▼</div></button>
+<button class="cb ${hl('cold')}" onclick="hBtn('cold')"><div class="bb"></div><div class="bls"><div class="bm">Frio <span>(Cold)</span></div><div class="bs">3º Botão <span class="ft dn">▼ DESCER</span></div></div></button>
+<button class="cb dis"><div class="bb"></div><div class="bls"><div class="bm">Delicados <span>(Delicates)</span></div><div class="bs">4º Botão</div></div></button>
 </div>
 <div class="sa">
-<button class="sb ${hl('start')}" onclick="hStart()"><div class="bb"></div><div class="bls"><div class="bm">Iniciar / Pausar <span>(Start)</span></div><div class="bs"> <span class="ft ok">â OK</span></div></div></button>
+<button class="sb ${hl('start')}" onclick="hStart()"><div class="bb"></div><div class="bls"><div class="bm">Iniciar / Pausar <span>(Start)</span></div><div class="bs"> <span class="ft ok">✓ OK</span></div></div></button>
 <div class="cpg">Add Super<br>Wash<br><span style="font-size:.4rem">Custom PGM</span></div>
 </div>
-${s?.hold?'<div class="ho sh"><button class="hb" onclick="hHold()">ð Simular: Segurar Hot + Cold por 5 segundos</button></div>':''}
+${s?.hold?'<div class="ho sh"><button class="hb" onclick="hHold()">🔒 Simular: Segurar Hot + Cold por 5 segundos</button></div>':''}
 </div>
 </div></div>
 
 <div class="guide">
-<div class="tabs">${T.map((t,i)=>{let c='tab';if(done.has(i))c+=' dn';else if(i===cT&&!allDone)c+=' ac';return`<button class="${c}" onclick="selT(${i})">${done.has(i)?'â ':''}${t.label}</button>`}).join('')}</div>
-<div class="gc">${allDone?`<div class="cmp"><div class="ic">â</div><h2>ConfiguraÃ§Ã£o Completa!</h2><p>As 3 configuraÃ§Ãµes foram realizadas:<br><b>Pdtd = PAY</b> Â· <b>UEnd = Coin</b> Â· <b>Co1 = 1000 (R$10,00)</b></p><button class="rb" onclick="reset()">RecomeÃ§ar Tutorial</button></div>`:s?`<div class="gn">${T[cT].label} â Passo ${cS+1} de ${T[cT].steps.length}</div><div class="gt">${s.t}</div><div class="gd">${s.d}</div><div class="ga ${s.at==='green'?'gr':s.at==='warn'?'wr':''}"><span>ð</span><span>${s.a}</span></div>`:''}</div>
+<div class="tabs">${T.map((t,i)=>{let c='tab';if(done.has(i))c+=' dn';else if(i===cT&&!allDone)c+=' ac';return`<button class="${c}" onclick="selT(${i})">${done.has(i)?'✓ ':''}${t.label}</button>`}).join('')}</div>
+<div class="gc">${allDone?`<div class="cmp"><div class="ic">✅</div><h2>Configuração Completa!</h2><p>As 3 configurações foram realizadas:<br><b>Pdtd = PAY</b> · <b>UEnd = Coin</b> · <b>Co1 = 1000 (R$10,00)</b></p><button class="rb" onclick="reset()">Recomeçar Tutorial</button></div>`:s?`<div class="gn">${T[cT].label} — Passo ${cS+1} de ${T[cT].steps.length}</div><div class="gt">${s.t}</div><div class="gd">${s.d}</div><div class="ga ${s.at==='green'?'gr':s.at==='warn'?'wr':''}"><span>👆</span><span>${s.a}</span></div>`:''}</div>
 <div class="pb"><div class="pf" style="width:${prog}%"></div></div>
 </div>`;
 }
