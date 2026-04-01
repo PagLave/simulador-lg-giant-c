@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simulador LG Giant C</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=DM+Sans:wght@400;500;600;700&display=swap');
+:root{--bg:#0d0d12;--text:#e4e4ef;--dim:#7a7a90;--card:#16161f;--border:#2a2a38;--accent:#ff4136;--green:#2ecc40;--blue:#3b82f6;--warn:#f4a623;--led:#ff2a1a;--glow:rgba(255,42,26,.35);--panel:#f7f3ee;--panel2:#eae5de;--pbord:#c8c2b8}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+.app{max-width:860px;margin:0 auto;padding:16px;display:flex;flex-direction:column;gap:16px}
+.hdr{text-align:center}
+.hdr h1{font-size:1.15rem;font-weight:700;background:linear-gradient(135deg,#fff,#aab);-webkit-background-clip:text;-webkit-text-fill-color:transparent}adius:6px;background:var(--card);border:1px solid var(--border);color:var(--dim);font-size:.7rem;font-weight:600;cursor:pointer;transition:all .2s}
+.tab:hover{background:#1e1e2a}
+.tab.ac{background:var(--accent);border-color:var(--accent);color:#fff}
+.tab.dn{background:#1a2e1a;border-color:var(--green);color:var(--green)}
+.gc{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:18px}
+.gn{font-size:.6rem;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.12em;margin-bottom:4px}
+.gt{font-size:1rem;font-weight:700;color:#fff;margin-bottom:8px}
+.gd{font-size:.82rem;color:var(--dim);line-height:1.6;margin-bottom:12px}
+.gd b{color:var(--text)}
+.gd code{background:#2a2a38;padding:1px 5px;border-radius:3px;font-family:'JetBrains Mono',monospace;font-size:.75rem;color:var(--led)}
+.ga{display:flex;align-items:center;gap:8px;padding:10px 14px;border-radius:6px;font-size:.78rem;font-weight:600;background:rgba(255,65,54,.07);border:1px solid rgba(255,65,54,.18);color:var(--accent)}
+.ga.gr{background:rgba(46,204,64,.07);border-color:rgba(46,204,64,.18);color:var(--green)}
+.ga.wr{background:rgba(244,166,35,.07);border-color:rgba(244,166,35,.18);color:var(--warn)}
+.pb{width:100%;height:3px;background:var(--border);border-radius:2px;margin-top:14px;overflow:hidden}
+.pf{height:100%;background:linear-gradient(90deg,var(--accent),var(--green));border-radius:2px;transition:width .5s}
+.cmp{text-align:center;padding:24px}
+.cmp .ic{font-size:2.5rem;margin-bottom:8px}
+.cmp h2{font-size:1.1rem;color:var(--green);margin-bottom:6px}
+.cmp p{color:var(--dim);font-size:.8rem;line-height:1.5}
+.rb{margin-top:12px;padding:8px 20px;background:var(--card);border:1px solid var(--border);border-radius:6px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:.75rem;font-weight:600;cursor:pointer}
+.rb:hover{background:#1e1e2a}
+@media(max-width:640px){.pnl{flex-direction:column}.pl{flex-direction:row;min-width:auto}.prr{min-width:auto}.lt{font-size:1.6rem}.sa{flex-direction:column}}
+</style>
+</head>
+<body>
+<div class="app" id="app"></div>
+<script>
+const T=[
+{id:'entry',label:'Entrar no Modo',steps:[
+{t:'Entrar no Modo de Configuração',d:'A máquina está em espera. Precisamos entrar no modo de configuração (SVC).',a:'Segure <b>1º botão (Hot)</b> + <b>3º botão (Cold)</b> por 5 segundos',at:'warn',hl:['hot','cold'],hold:true,td:'00:00'},
+{t:'Selecionar código 03',d:'O display mostra <code>00:00</code>. Pressione Warm (▲ Subir) para avançar até <code>03</code>.',a:'Pressione <b>Warm</b> (▲ Subir) 3 vezes',at:'',hl:['warm'],td:'03',mp:{b:'warm',n:3,s:['01','02','03']}},
+{t:'Confirmar entrada',d:'O display mostra <code>03</code>. Pressione Start para entrar no modo de configuração.',a:'Pressione <b>Start</b> (OK)',at:'green',hl:['start'],td:'L9CI'},
+{t:'Navegar para tESt',d:'Você entrou no modo SVC (<code>L9CI</code>). <b>⚠ NÃO aperte Start aqui!</b> Pressione Hot (Voltar).',a:'Pressione <b>Hot</b> (← Voltar)',at:'',hl:['hot'],td:'tESt'},
+{t:'Navegar para SEtUP',d:'O display mostra <code>tESt</code>. Pressione Warm para ir ao menu de configurações.',a:'Pressione <b>Warm</b> (▲ Subir)',at:'',hl:['warm'],td:'SEtUP'},
+{t:'Entrar em SEtUP',d:'O display mostra <code>SEtUP</code>. Pressione Start para entrar.',a:'Pressione <b>Start</b> (OK)',at:'green',hl:['start'],td:'F9Pr'},
+]},
+{id:'pdtd',label:'Seção 1: PAY',steps:[
+{t:'Navegar até tYPE',d:'Estamos no submenu (<code>F9Pr</code>). Pressione Warm ou Cold várias vezes até encontrar <code>tYPE</code>.',a:'Pressione <b>Warm</b> (▲) até aparecer <b>tYPE</b>',at:'',hl:['warm'],td:'tYPE'},
+{t:'Entrar em tYPE',d:'O display mostra <code>tYPE</code>. Pressione Start para entrar.',a:'Pressione <b>Start</b> (OK)',at:'green',hl:['start'],td:'Pdtd'},
+{t:'Abrir Pdtd',d:'O display mostra <code>Pdtd</code> (Tipo de Produto). Pressione Start para ver o valor atual.',a:'Pressione <b>Start</b> (OK)',at:'green',hl:['start'],td:'FrEE'},
+{t:'Selecionar PAY',d:'O display mostra <code>FrEE</code> (gratuito). Pressione Warm para alternar para <code>PAY</code>.',a:'Pressione <b>Warm</b> (▲) para selecionar <b>PAY</b>',at:'',hl:['warm'],td:'PAY'},
+{t:'Confirmar PAY ✓',d:'O display mostra <code>PAY</code>. Pressione Start para salvar.',a:'Pressione <b>Start</b> (OK) para salvar',at:'green',hl:['start'],td:'✓ PAY'},
+]},
+{id:'uend',label:'Seção 2: Coin',steps:[
+{t:'Navegar até UEnd',d:'Voltamos ao submenu <code>tYPE</code>. Navegue até <code>UEnd</code>.',a:'Pressione <b>Warm</b> (▲) até aparecer <b>UEnd</b>',at:'',hl:['warm'],td:'UEnd',sd:'Pdtd'},
+{t:'Entrar em UEnd',d:'O display mostra <code>UEnd</code> (Tipo de Venda). Pressione Start.',a:'Pressione <b>Start</b> (OK)',at:'green',hl:['start'],td:'CRrd'},
+{t:'Selecionar Coin',d:'O display mostra <code>CRrd</code> (Cartão). Pressione Warm para alternar para <code>Coin</code>.',a:'Pressione <b>Warm</b> (▲) para selecionar <b>Coin</b>',at:'',hl:['warm'],td:'Coin'},
+{t:'Confirmar Coin ✓',d:'O display mostra <code>Coin</code>. Pressione Start para salvar.',a:'Pressione <b>Start</b> (OK) para salvar',at:'green',hl:['start'],td:'✓ Coin'},
+]},
+{id:'co1',label:'Seção 3: Valor',steps:[
+{t:'Navegar até Co1',d:'Estamos no submenu SEtUP (<code>F9Pr</code>). Pressione Warm ou Cold várias vezes até encontrar <code>Co1</code>.',a:'Pressione <b>Warm</b> (▲) até aparecer <b>Co1</b>',at:'',hl:['warm'],td:'Co1',sd:'F9Pr'},
+{t:'Entrar em Co1',d:'O display mostra <code>Co1</code> (Valor da moeda 1). Pressione Start para ver o valor atual.',a:'Pressione <b>Start</b> (OK)',at:'green',hl:['start'],td:'0100'},
+{t:'Ajustar para 1000',d:'Use Warm (▲) para aumentar até <code>1000</code> (= R$10,00). Na simulação, cada clique pula alguns valores para agilizar.',a:'Pressione <b>Warm</b> (▲) até mostrar <b>1000</b>',at:'',hl:['warm'],td:'1000',mp:{b:'warm',n:5,s:['0200','0400','0600','0800','1000']}},
+{t:'Confirmar valor ✓',d:'O display mostra <code>1000</code> (R$10,00). Pressione Start para salvar.',a:'Pressione <b>Start</b> (OK) para salvar',at:'green',hl:['start'],td:'✓ 1000'},
+]},
+{id:'exit',label:'Sair do Modo',steps:[
+{t:'Voltar ao menu anterior',d:'Valor salvo! Agora precisamos sair do modo de configuração. Pressione Hot (Voltar) para retornar ao menu anterior.',a:'Pressione <b>Hot</b> (← Voltar)',at:'',hl:['hot'],td:'Co1',sd:'P1Po'},
+{t:'Continuar voltando',d:'Continue pressionando Hot (Voltar) para ir saindo dos submenus.',a:'Pressione <b>Hot</b> (← Voltar)',at:'',hl:['hot'],td:'F9Pr'},
+{t:'Voltar mais um nível',d:'Estamos em <code>F9Pr</code>. Continue pressionando Hot (Voltar).',a:'Pressione <b>Hot</b> (← Voltar)',at:'',hl:['hot'],td:'SEtUP'},
+{t:'Sair do modo de configuração',d:'Estamos em <code>SEtUP</code>. Pressione Hot (Voltar) mais uma vez para sair completamente.',a:'Pressione <b>Hot</b> (← Voltar) para sair',at:'',hl:['hot'],td:'PUSH'},
+]},
+];
+let cT=0,cS=0,disp='PUSH',pC=0,done=new Set(),allDone=false;
+function gs(){return allDone?null:T[cT]?.steps[cS]||null}
+function adv(){const t=T[cT];if(cS<t.steps.length-1){cS++;pC=0;const n=gs();if(n?.sd)disp=n.sd}else{done.add(cT);if(cT<T.length-1){cT++;cS=0;pC=0;const n=gs();if(n?.sd)disp=n.sd}else{allDone=true;disp='PUSH'}}render()}
+function hBtn(id){const s=gs();if(!s||s.hold)return;if(s.mp){if(id===s.mp.b){if(pC<s.mp.n-1){disp=s.mp.s[pC];pC++;render();return}else{disp=s.mp.s[s.mp.n-1];pC=0;adv();return}}return}if(!s.hl?.includes(id))return;disp=s.td;adv()}
+function hHold(){const s=gs();if(!s?.hold)return;disp=s.td;adv()}
+function hStart(){hBtn('start')}
+function selT(i){if(i>0&&!done.has(i-1))return;cT=i;cS=0;pC=0;allDone=false;const s=gs();if(s?.sd)disp=s.sd;else if(i===0)disp='PUSH';render()}
+function reset(){cT=0;cS=0;pC=0;disp='PUSH';done.clear();allDone=false;render()}
+function totS(){return T.reduce((a,t)=>a+t.steps.length,0)}
+function dneS(){let d=0;for(let i=0;i<T.length;i++){if(done.has(i))d+=T[i].steps.length;else if(i===cT)d+=cS}return d}
+function hl(id){const s=gs();if(!s)return'';if(s.hold&&(id==='hot'||id==='cold'))return'hw';if(s.hl?.includes(id))return'hl';return''}
+
+const W=`<svg viewBox="0 0 24 24"><path d="M12 18c-.55 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1zm-4.24-2.76a6.003 6.003 0 0 1 8.49 0l1.41-1.41a8.003 8.003 0 0 0-11.31 0l1.41 1.41zm-2.83-2.83a10.003 10.003 0 0 1 14.14 0l1.41-1.41c-4.69-4.69-12.28-4.69-16.97 0l1.42 1.41z"/></svg>`;
+const WI=`<svg viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="1.5"><rect x="5" y="5" width="14" height="14" rx="2"/><circle cx="12" cy="12" r="4"/><path d="M9 9l6 6M15 9l-6 6" stroke-width="1"/></svg>`;
+
+
+// 7-Segment Display Renderer
+const SEG_MAP={
+'0':'abcdef','1':'bc','2':'abdeg','3':'abcdg','4':'bcfg','5':'acdfg','6':'acdefg','7':'abc',
+'8':'abcdefg','9':'abcdfg','A':'abcefg','a':'abcefg','B':'acdefg','b':'cdefg','C':'adef',
+'c':'deg','D':'bcdeg','d':'bcdeg','E':'adefg','e':'adefg','F':'aefg','f':'aefg',
+'G':'acdef','g':'abcdfg','H':'bcefg','h':'cefg','I':'ef','i':'c','J':'bcd','j':'bcd',
+'L':'def','l':'def','N':'abcef','n':'ceg','O':'abcdef','o':'cdeg','P':'abefg','p':'abefg',
+'Q':'abcfg','q':'abcfg','R':'eg','r':'eg','S':'acdfg','s':'acdfg','T':'defg','t':'defg',
+'U':'bcdef','u':'cde','V':'bcdef','v':'cde','Y':'bcdfg','y':'bcdfg','-':'g','_':'d',
+' ':'','.':'dp',':':'co','✓':'abcfg'
+};
+
+function segSVG(text, isOk) {
+  const on = isOk ? '#22dd44' : '#ff2a1a';
+  const off = isOk ? '#0a1a0a' : '#1a0808';
+  const glow = isOk ? 'rgba(34,221,68,.4)' : 'rgba(255,42,26,.3)';
+  const chars = text.split('');
+  const cw = 22, ch = 38, gap = 3;
+  const totalW = chars.length * (cw + gap);
+  
+  let svg = `<svg width="${totalW}" height="${ch}" viewBox="0 0 ${totalW} ${ch}" xmlns="http://www.w3.org/2000/svg">`;
+  
+  chars.forEach((char, i) => {
+    const x = i * (cw + gap);
+    const segs = SEG_MAP[char] || '';
+    
+    if (char === ':') {
+      svg += `<circle cx="${x+6}" cy="${ch/3}" r="2.5" fill="${on}"/>`;
+      svg += `<circle cx="${x+6}" cy="${ch*2/3}" r="2.5" fill="${on}"/>`;
+      return;
+    }
+    if (char === '.') {
+      svg += `<circle cx="${x+5}" cy="${ch-3}" r="2.5" fill="${on}"/>`;
+      return;
+    }
+    if (char === ' ') return;
+    
+    // Segment definitions: [points]
+    const S = {
+      a: `${x+4},1 ${x+6},3 ${x+16},3 ${x+18},1 ${x+16},0 ${x+6},0`,
+      b: `${x+19},3 ${x+19},16 ${x+18},18 ${x+17},16 ${x+17},5 ${x+18},3`,
+      c: `${x+19},20 ${x+19},33 ${x+18},35 ${x+17},33 ${x+17},22 ${x+18},20`,
+      d: `${x+4},37 ${x+6},35 ${x+16},35 ${x+18},37 ${x+16},38 ${x+6},38`,
+      e: `${x+3},20 ${x+3},33 ${x+4},35 ${x+5},33 ${x+5},22 ${x+4},20`,
+      f: `${x+3},3 ${x+3},16 ${x+4},18 ${x+5},16 ${x+5},5 ${x+4},3`,
+      g: `${x+4},18 ${x+6},17 ${x+16},17 ${x+18},18 ${x+16},20 ${x+6},20`,
+    };
+    
+    // Draw all segments dim first (ghost)
+    for (const [seg, pts] of Object.entries(S)) {
+      svg += `<polygon points="${pts}" fill="${off}"/>`;
+    }
+    // Draw active segments bright
+    for (const [seg, pts] of Object.entries(S)) {
+      if (segs.includes(seg)) {
+        svg += `<polygon points="${pts}" fill="${on}"/>`;
+      }
+    }
+  });
+  
+  svg += '</svg>';
+  return svg;
+}
+
+function render(){
+const s=gs(),prog=allDone?100:(dneS()/totS())*100,isOk=disp.startsWith('✓'),val=isOk?disp.slice(2):disp;
+document.getElementById('app').innerHTML=`
+<div class="hdr"><h1>Simulador de Configuração — LG Giant C</h1><p>Clique nos botões destacados do painel para seguir o passo a passo</p></div>
+<div class="mw"><div class="ml">Painel de Controle — LG Giant C (CWG27MDCRS)</div>
+<div class="pnl">
+<div class="pl"><div class="plt">Processing</div>
+<div class="pr">
+<div class="pg">${WI}<div class="plds"><div class="pld"></div><div class="pld"></div></div><div class="plbl">Wash</div></div>
+<div class="parr">►</div>
+<div class="pg">${WI}<div class="plds"><div class="pld"></div><div class="pld"></div></div><div class="plbl">Rinse</div></div>
+<div class="parr">►</div>
+<div class="pg">${WI}<div class="plds"><div class="pld"></div><div class="pld"></div></div><div class="plbl">Spin</div></div>
+</div></div>
+
+<div class="pc"><div class="db">
+<div class="wi">${W}<span>Wi-Fi</span></div>
+<div class="ls"><div class="seg-display${isOk?' ok':''}">${segSVG(isOk?val:val,isOk)}</div><div class="mn">min</div></div>
+</div>
+<div class="dbot"><div class="dl"><div class="dle"></div>Door Lock</div><div style="font-size:.42rem;color:#aaa">EST. Time Remaining</div></div>
+</div>
+
+<div class="prr">
+<div class="bg"><div class="bgt">Botão de ciclo</div>
+<button class="cb ${hl('hot')}" onclick="hBtn('hot')"><div class="bb"></div><div class="bls"><div class="bm">Quente <span>(Hot)</span></div><div class="bs">1º Botão <span class="ft bk">← VOLTAR</span></div></div><div class="ba">▲</div></button>
+<button class="cb ${hl('warm')}" onclick="hBtn('warm')"><div class="bb"></div><div class="bls"><div class="bm">Morno <span>(Warm)</span></div><div class="bs">2º Botão <span class="ft up">▲ SUBIR</span></div></div><div class="ba">▼</div></button>
+<button class="cb ${hl('cold')}" onclick="hBtn('cold')"><div class="bb"></div><div class="bls"><div class="bm">Frio <span>(Cold)</span></div><div class="bs">3º Botão <span class="ft dn">▼ DESCER</span></div></div></button>
+<button class="cb dis"><div class="bb"></div><div class="bls"><div class="bm">Delicados <span>(Delicates)</span></div><div class="bs">4º Botão</div></div></button>
+</div>
+<div class="sa">
+<button class="sb ${hl('start')}" onclick="hStart()"><div class="bb"></div><div class="bls"><div class="bm">Iniciar / Pausar <span>(Start)</span></div><div class="bs"> <span class="ft ok">✓ OK</span></div></div></button>
+<div class="cpg">Add Super<br>Wash<br><span style="font-size:.4rem">Custom PGM</span></div>
+</div>
+${s?.hold?'<div class="ho sh"><button class="hb" onclick="hHold()">🔒 Simular: Segurar Hot + Cold por 5 segundos</button></div>':''}
+</div>
+</div></div>
+
+<div class="guide">
+<div class="tabs">${T.map((t,i)=>{let c='tab';if(done.has(i))c+=' dn';else if(i===cT&&!allDone)c+=' ac';return`<button class="${c}" onclick="selT(${i})">${done.has(i)?'✓ ':''}${t.label}</button>`}).join('')}</div>
+<div class="gc">${allDone?`<div class="cmp"><div class="ic">✅</div><h2>Configuração Completa!</h2><p>As 3 configurações foram realizadas:<br><b>Pdtd = PAY</b> · <b>UEnd = Coin</b> · <b>Co1 = 1000 (R$10,00)</b></p><button class="rb" onclick="reset()">Recomeçar Tutorial</button></div>`:s?`<div class="gn">${T[cT].label} — Passo ${cS+1} de ${T[cT].steps.length}</div><div class="gt">${s.t}</div><div class="gd">${s.d}</div><div class="ga ${s.at==='green'?'gr':s.at==='warn'?'wr':''}"><span>👆</span><span>${s.a}</span></div>`:''}</div>
+<div class="pb"><div class="pf" style="width:${prog}%"></div></div>
+</div>`;
+}
+render();
+</script>
+</body>
+</html>
