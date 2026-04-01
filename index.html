@@ -31,9 +31,9 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
 .wi{display:flex;flex-direction:column;align-items:center;gap:2px}
 .wi svg{width:22px;height:22px;fill:#bbb}
 .wi span{font-size:.45rem;color:#aaa}
-.ls{flex:1;background:#111;border-radius:6px;padding:12px 16px;display:flex;align-items:center;justify-content:center;min-height:56px;box-shadow:inset 0 2px 8px rgba(0,0,0,.6);position:relative}
+.ls{flex:1;background:#111;border-radius:6px;padding:14px 18px;display:flex;align-items:center;justify-content:center;min-height:72px;box-shadow:inset 0 2px 8px rgba(0,0,0,.6);position:relative}
 .seg-display{display:flex;align-items:center;justify-content:center;gap:2px;min-height:40px}
-.seg-display svg{filter:drop-shadow(0 0 3px var(--glow))}
+.seg-display svg{filter:drop-shadow(0 0 4px var(--glow)) drop-shadow(0 0 10px var(--glow))}
 .seg-display.ok svg{filter:drop-shadow(0 0 3px rgba(46,204,64,.35))}
 .mn{font-size:.45rem;color:#888;position:absolute;bottom:3px;right:7px}
 .dbot{display:flex;justify-content:space-between;align-items:center;padding:0 4px}
@@ -101,38 +101,38 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
 <div class="app" id="app"></div>
 <script>
 const T=[
-{id:'entry',label:'Entrar no Modo',steps:[
+{id:'entry',label:'Entrar no Modo de Configuração',steps:[
 {t:'Entrar no Modo de Configuração',d:'A máquina está em espera. Precisamos entrar no modo de configuração (SVC).',a:'Segure <b>1º botão (Hot)</b> + <b>3º botão (Cold)</b> por 5 segundos',at:'warn',hl:['hot','cold'],hold:true,td:'00:00'},
 {t:'Selecionar código 03',d:'O display mostra <code>00:00</code>. Pressione Warm (▲ Subir) para avançar até <code>03</code>.',a:'Pressione <b>Warm</b> (▲ Subir) 3 vezes',at:'',hl:['warm'],td:'03',mp:{b:'warm',n:3,s:['01','02','03']}},
 {t:'Confirmar entrada',d:'O display mostra <code>03</code>. Pressione Start para entrar no modo de configuração.',a:'Pressione <b>Start</b> (OK)',at:'green',hl:['start'],td:'L9CI'},
-{t:'Navegar para tESt',d:'Você entrou no modo SVC (<code>L9CI</code>). <b>⚠ NÃO aperte Start aqui!</b> Pressione Hot (Voltar).',a:'Pressione <b>Hot</b> (← Voltar)',at:'',hl:['hot'],td:'tESt'},
-{t:'Navegar para SEtUP',d:'O display mostra <code>tESt</code>. Pressione Warm para ir ao menu de configurações.',a:'Pressione <b>Warm</b> (▲ Subir)',at:'',hl:['warm'],td:'SEtUP'},
-{t:'Entrar em SEtUP',d:'O display mostra <code>SEtUP</code>. Pressione Start para entrar.',a:'Pressione <b>Start</b> (OK)',at:'green',hl:['start'],td:'F9Pr'},
+{t:'Navegar para EE5t (tESt)',d:'Você entrou no modo de configuração (<code>L9CI</code>). <b>⚠ NÃO aperte Start aqui!</b> Pressione Hot (Voltar).',a:'Pressione <b>Hot</b> (← Voltar)',at:'',hl:['hot'],td:'EE5t'},
+{t:'Navegar para 5tUP (SEtUP)',d:'O display mostra <code>EE5t</code> (tESt). Pressione Warm para ir ao menu SEtUP.',a:'Pressione <b>Warm</b> (▲ Subir)',at:'',hl:['warm'],td:'5tUP'},
+{t:'Entrar em SEtUP',d:'O display mostra <code>5tUP</code> (SEtUP). Pressione Start para entrar.',a:'Pressione <b>Start</b> (OK)',at:'green',hl:['start'],td:'r9Pr'},
 ]},
 {id:'pdtd',label:'Seção 1: PAY',steps:[
-{t:'Navegar até tYPE',d:'Estamos no submenu (<code>F9Pr</code>). Pressione Warm ou Cold várias vezes até encontrar <code>tYPE</code>.',a:'Pressione <b>Warm</b> (▲) até aparecer <b>tYPE</b>',at:'',hl:['warm'],td:'tYPE'},
-{t:'Entrar em tYPE',d:'O display mostra <code>tYPE</code>. Pressione Start para entrar.',a:'Pressione <b>Start</b> (OK)',at:'green',hl:['start'],td:'Pdtd'},
+{t:'Navegar até t4PE',d:'Estamos no submenu (<code>r9Pr</code>). Pressione Warm ou Cold várias vezes até encontrar <code>t4PE</code>.',a:'Pressione <b>Warm</b> (▲) até aparecer <b>t4PE</b>',at:'',hl:['warm'],td:'t4PE'},
+{t:'Entrar em t4PE',d:'O display mostra <code>t4PE</code>. Pressione Start para entrar.',a:'Pressione <b>Start</b> (OK)',at:'green',hl:['start'],td:'Pdtd'},
 {t:'Abrir Pdtd',d:'O display mostra <code>Pdtd</code> (Tipo de Produto). Pressione Start para ver o valor atual.',a:'Pressione <b>Start</b> (OK)',at:'green',hl:['start'],td:'FrEE'},
 {t:'Selecionar PAY',d:'O display mostra <code>FrEE</code> (gratuito). Pressione Warm para alternar para <code>PAY</code>.',a:'Pressione <b>Warm</b> (▲) para selecionar <b>PAY</b>',at:'',hl:['warm'],td:'PAY'},
 {t:'Confirmar PAY ✓',d:'O display mostra <code>PAY</code>. Pressione Start para salvar.',a:'Pressione <b>Start</b> (OK) para salvar',at:'green',hl:['start'],td:'✓ PAY'},
 ]},
 {id:'uend',label:'Seção 2: Coin',steps:[
-{t:'Navegar até UEnd',d:'Voltamos ao submenu <code>tYPE</code>. Navegue até <code>UEnd</code>.',a:'Pressione <b>Warm</b> (▲) até aparecer <b>UEnd</b>',at:'',hl:['warm'],td:'UEnd',sd:'Pdtd'},
+{t:'Navegar até UEnd',d:'Voltamos ao submenu <code>t4PE</code> (Type). Navegue até <code>UEnd</code>.',a:'Pressione <b>Warm</b> (▲) até aparecer <b>UEnd</b>',at:'',hl:['warm'],td:'UEnd',sd:'Pdtd'},
 {t:'Entrar em UEnd',d:'O display mostra <code>UEnd</code> (Tipo de Venda). Pressione Start.',a:'Pressione <b>Start</b> (OK)',at:'green',hl:['start'],td:'CRrd'},
 {t:'Selecionar Coin',d:'O display mostra <code>CRrd</code> (Cartão). Pressione Warm para alternar para <code>Coin</code>.',a:'Pressione <b>Warm</b> (▲) para selecionar <b>Coin</b>',at:'',hl:['warm'],td:'Coin'},
 {t:'Confirmar Coin ✓',d:'O display mostra <code>Coin</code>. Pressione Start para salvar.',a:'Pressione <b>Start</b> (OK) para salvar',at:'green',hl:['start'],td:'✓ Coin'},
 ]},
 {id:'co1',label:'Seção 3: Valor',steps:[
-{t:'Navegar até Co1',d:'Estamos no submenu SEtUP (<code>F9Pr</code>). Pressione Warm ou Cold várias vezes até encontrar <code>Co1</code>.',a:'Pressione <b>Warm</b> (▲) até aparecer <b>Co1</b>',at:'',hl:['warm'],td:'Co1',sd:'F9Pr'},
+{t:'Navegar até Co1',d:'Estamos no submenu SEtUP (<code>r9Pr</code>). Pressione Warm ou Cold várias vezes até encontrar <code>Co1</code>.',a:'Pressione <b>Warm</b> (▲) até aparecer <b>Co1</b>',at:'',hl:['warm'],td:'Co1',sd:'r9Pr'},
 {t:'Entrar em Co1',d:'O display mostra <code>Co1</code> (Valor da moeda 1). Pressione Start para ver o valor atual.',a:'Pressione <b>Start</b> (OK)',at:'green',hl:['start'],td:'0100'},
 {t:'Ajustar para 1000',d:'Use Warm (▲) para aumentar até <code>1000</code> (= R$10,00). Na simulação, cada clique pula alguns valores para agilizar.',a:'Pressione <b>Warm</b> (▲) até mostrar <b>1000</b>',at:'',hl:['warm'],td:'1000',mp:{b:'warm',n:5,s:['0200','0400','0600','0800','1000']}},
 {t:'Confirmar valor ✓',d:'O display mostra <code>1000</code> (R$10,00). Pressione Start para salvar.',a:'Pressione <b>Start</b> (OK) para salvar',at:'green',hl:['start'],td:'✓ 1000'},
 ]},
-{id:'exit',label:'Sair do Modo',steps:[
+{id:'exit',label:'Sair do Modo de Configuração',steps:[
 {t:'Voltar ao menu anterior',d:'Valor salvo! Agora precisamos sair do modo de configuração. Pressione Hot (Voltar) para retornar ao menu anterior.',a:'Pressione <b>Hot</b> (← Voltar)',at:'',hl:['hot'],td:'Co1',sd:'P1Po'},
-{t:'Continuar voltando',d:'Continue pressionando Hot (Voltar) para ir saindo dos submenus.',a:'Pressione <b>Hot</b> (← Voltar)',at:'',hl:['hot'],td:'F9Pr'},
-{t:'Voltar mais um nível',d:'Estamos em <code>F9Pr</code>. Continue pressionando Hot (Voltar).',a:'Pressione <b>Hot</b> (← Voltar)',at:'',hl:['hot'],td:'SEtUP'},
-{t:'Sair do modo de configuração',d:'Estamos em <code>SEtUP</code>. Pressione Hot (Voltar) mais uma vez para sair completamente.',a:'Pressione <b>Hot</b> (← Voltar) para sair',at:'',hl:['hot'],td:'PUSH'},
+{t:'Continuar voltando',d:'Continue pressionando Hot (Voltar) para ir saindo dos submenus.',a:'Pressione <b>Hot</b> (← Voltar)',at:'',hl:['hot'],td:'r9Pr'},
+{t:'Voltar mais um nível',d:'Estamos em <code>r9Pr</code>. Continue pressionando Hot (Voltar).',a:'Pressione <b>Hot</b> (← Voltar)',at:'',hl:['hot'],td:'5tUP'},
+{t:'Sair do modo de configuração',d:'Estamos em <code>5tUP</code> (SEtUP). Pressione Hot (Voltar) mais uma vez para sair completamente.',a:'Pressione <b>Hot</b> (← Voltar) para sair',at:'',hl:['hot'],td:'PUSH'},
 ]},
 ];
 let cT=0,cS=0,disp='PUSH',pC=0,done=new Set(),allDone=false;
@@ -151,69 +151,87 @@ const W=`<svg viewBox="0 0 24 24"><path d="M12 18c-.55 0-1 .45-1 1s.45 1 1 1 1-.
 const WI=`<svg viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="1.5"><rect x="5" y="5" width="14" height="14" rx="2"/><circle cx="12" cy="12" r="4"/><path d="M9 9l6 6M15 9l-6 6" stroke-width="1"/></svg>`;
 
 
-// 7-Segment Display Renderer
+// 7-Segment Display Renderer (matching LG manual style - slanted thick segments)
 const SEG_MAP={
 '0':'abcdef','1':'bc','2':'abdeg','3':'abcdg','4':'bcfg','5':'acdfg','6':'acdefg','7':'abc',
 '8':'abcdefg','9':'abcdfg','A':'abcefg','a':'abcefg','B':'acdefg','b':'cdefg','C':'adef',
 'c':'deg','D':'bcdeg','d':'bcdeg','E':'adefg','e':'adefg','F':'aefg','f':'aefg',
-'G':'acdef','g':'abcdfg','H':'bcefg','h':'cefg','I':'ef','i':'c','J':'bcd','j':'bcd',
+'G':'acdef','g':'abcdfg','H':'bcefg','h':'cefg','I':'bc','i':'c','J':'bcd','j':'bcd',
 'L':'def','l':'def','N':'abcef','n':'ceg','O':'abcdef','o':'cdeg','P':'abefg','p':'abefg',
 'Q':'abcfg','q':'abcfg','R':'eg','r':'eg','S':'acdfg','s':'acdfg','T':'defg','t':'defg',
-'U':'bcdef','u':'cde','V':'bcdef','v':'cde','Y':'bcdfg','y':'bcdfg','-':'g','_':'d',
-' ':'','.':'dp',':':'co','✓':'abcfg'
+'U':'bcdef','u':'cde','V':'bcdef','v':'cde','Y':'bcfg','y':'bcfg','-':'g','_':'d',
+' ':'','.':'dp',':':'co','\u2713':'abcfg'
 };
 
 function segSVG(text, isOk) {
   const on = isOk ? '#22dd44' : '#ff2a1a';
-  const off = isOk ? '#0a1a0a' : '#1a0808';
-  const glow = isOk ? 'rgba(34,221,68,.4)' : 'rgba(255,42,26,.3)';
+  const off = isOk ? '#0a1a0a' : '#1c0606';
   const chars = text.split('');
-  const cw = 22, ch = 38, gap = 3;
-  const totalW = chars.length * (cw + gap);
-  
+  const cw = 30, ch = 50, gap = 5, sk = 4, tw = 5.5;
+  const totalW = chars.length * (cw + gap) + sk + 6;
+
   let svg = `<svg width="${totalW}" height="${ch}" viewBox="0 0 ${totalW} ${ch}" xmlns="http://www.w3.org/2000/svg">`;
-  
-  chars.forEach((char, i) => {
-    const x = i * (cw + gap);
+
+  chars.forEach((char, idx) => {
+    const ox = idx * (cw + gap) + 3;
     const segs = SEG_MAP[char] || '';
-    
+
     if (char === ':') {
-      svg += `<circle cx="${x+6}" cy="${ch/3}" r="2.5" fill="${on}"/>`;
-      svg += `<circle cx="${x+6}" cy="${ch*2/3}" r="2.5" fill="${on}"/>`;
+      const cx = ox + 6;
+      svg += `<rect x="${cx}" y="16" width="6" height="6" rx="1.5" fill="${on}"/>`;
+      svg += `<rect x="${cx}" y="32" width="6" height="6" rx="1.5" fill="${on}"/>`;
       return;
     }
     if (char === '.') {
-      svg += `<circle cx="${x+5}" cy="${ch-3}" r="2.5" fill="${on}"/>`;
+      svg += `<rect x="${ox+3}" y="${ch-7}" width="5" height="5" rx="1.2" fill="${on}"/>`;
       return;
     }
     if (char === ' ') return;
-    
-    // Segment definitions: [points]
-    const S = {
-      a: `${x+4},1 ${x+6},3 ${x+16},3 ${x+18},1 ${x+16},0 ${x+6},0`,
-      b: `${x+19},3 ${x+19},16 ${x+18},18 ${x+17},16 ${x+17},5 ${x+18},3`,
-      c: `${x+19},20 ${x+19},33 ${x+18},35 ${x+17},33 ${x+17},22 ${x+18},20`,
-      d: `${x+4},37 ${x+6},35 ${x+16},35 ${x+18},37 ${x+16},38 ${x+6},38`,
-      e: `${x+3},20 ${x+3},33 ${x+4},35 ${x+5},33 ${x+5},22 ${x+4},20`,
-      f: `${x+3},3 ${x+3},16 ${x+4},18 ${x+5},16 ${x+5},5 ${x+4},3`,
-      g: `${x+4},18 ${x+6},17 ${x+16},17 ${x+18},18 ${x+16},20 ${x+6},20`,
-    };
-    
-    // Draw all segments dim first (ghost)
-    for (const [seg, pts] of Object.entries(S)) {
-      svg += `<polygon points="${pts}" fill="${off}"/>`;
+
+    const m = 1.5;
+    const top = 2, mid = ch / 2, bot = ch - 2;
+
+    // Skew helper: shift x based on y position (higher = more right)
+    function sx(x, y) { return x + (mid - y) / mid * sk; }
+
+    // Horizontal segment (hexagonal shape)
+    function hSeg(l, r, y) {
+      const hl = tw / 2;
+      return `${sx(l+m+hl,y)},${y} ${sx(l+m+tw,y-hl)},${y-hl} ${sx(r-m-tw,y-hl)},${y-hl} ${sx(r-m-hl,y)},${y} ${sx(r-m-tw,y+hl)},${y+hl} ${sx(l+m+tw,y+hl)},${y+hl}`;
     }
-    // Draw active segments bright
+
+    // Vertical segment (hexagonal shape)
+    function vSeg(x, y1, y2) {
+      const hl = tw / 2;
+      const ym = (y1 + y2) / 2;
+      return `${sx(x,y1+m)},${y1+m} ${sx(x+hl,y1+m+hl)},${y1+m+hl} ${sx(x+hl,ym)},${ym} ${sx(x+hl,y2-m-hl)},${y2-m-hl} ${sx(x,y2-m)},${y2-m} ${sx(x-hl,ym)},${ym}`;
+    }
+
+    const l = ox, r = ox + cw;
+    const S = {
+      a: hSeg(l, r, top),
+      b: vSeg(r, top, mid),
+      c: vSeg(r, mid, bot),
+      d: hSeg(l, r, bot),
+      e: vSeg(l, mid, bot),
+      f: vSeg(l, top, mid),
+      g: hSeg(l, r, mid),
+    };
+
+    for (const [seg, pts] of Object.entries(S)) {
+      svg += `<polygon points="${pts}" fill="${off}" opacity="0.6"/>`;
+    }
     for (const [seg, pts] of Object.entries(S)) {
       if (segs.includes(seg)) {
         svg += `<polygon points="${pts}" fill="${on}"/>`;
       }
     }
   });
-  
+
   svg += '</svg>';
   return svg;
 }
+
 
 function render(){
 const s=gs(),prog=allDone?100:(dneS()/totS())*100,isOk=disp.startsWith('✓'),val=isOk?disp.slice(2):disp;
