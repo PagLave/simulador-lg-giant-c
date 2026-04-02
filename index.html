@@ -2,6 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'unsafe-inline'; img-src 'self' data:; connect-src 'none'; frame-src 'none'; object-src 'none'; media-src 'none';">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <title>Simulador LG Giant C</title>
 <style>
@@ -10,325 +11,261 @@
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;font-size:16px}
 .app{max-width:860px;margin:0 auto;padding:8px;display:flex;flex-direction:column;gap:8px}
-
-/* === GUIDE (NOW ON TOP) === */
-.guide-top{order:1}
-.guide-tabs{order:3}
-.tabs{display:flex;gap:6px;margin-bottom:10px;flex-wrap:wrap}
-.tab{padding:10px 14px;border-radius:8px;background:var(--card);border:2px solid var(--border);color:var(--dim);font-size:.85rem;font-weight:700;cursor:pointer;transition:all .2s}
-.tab.ac{background:var(--accent);border-color:var(--accent);color:#fff}
-.tab.dn{background:#1a2e1a;border-color:var(--green);color:var(--green)}
 .gc{background:var(--card);border:2px solid var(--border);border-radius:10px;padding:12px 14px}
-.gn{font-size:.8rem;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px}
+.gn{font-size:.8rem;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px}
 .gt{font-size:1.1rem;font-weight:700;color:#fff;margin-bottom:6px;line-height:1.3}
-.gd{font-size:.9rem;color:var(--dim);line-height:1.5;margin-bottom:10px}
-.gd b{color:#fff}
-.gd code{background:#2a2a3a;padding:2px 8px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:.95rem;color:#44ee55}
+.gd{font-size:.9rem;color:var(--dim);line-height:1.5;margin-bottom:10px}.gd b{color:#fff}
+.gd code{background:#2a2a3a;padding:2px 8px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:.9rem;color:#44ee55}
 .ga{display:flex;align-items:center;gap:8px;padding:10px 14px;border-radius:10px;font-size:1rem;font-weight:700;background:rgba(255,65,54,.1);border:2px solid rgba(255,65,54,.25);color:var(--accent)}
 .ga.gr{background:rgba(46,204,64,.1);border-color:rgba(46,204,64,.25);color:var(--green)}
 .ga.wr{background:rgba(244,166,35,.1);border-color:rgba(244,166,35,.25);color:var(--warn)}
-.ga .arrow{font-size:1.4rem}
-.pb{width:100%;height:4px;background:var(--border);border-radius:3px;margin-top:14px;overflow:hidden}
+.tabs{display:flex;gap:6px;margin-bottom:8px;flex-wrap:wrap}
+.tab{padding:8px 12px;border-radius:8px;background:var(--card);border:2px solid var(--border);color:var(--dim);font-size:.8rem;font-weight:700;cursor:pointer}
+.tab.ac{background:var(--accent);border-color:var(--accent);color:#fff}
+.tab.dn{background:#1a2e1a;border-color:var(--green);color:var(--green)}
+.pb{width:100%;height:4px;background:var(--border);border-radius:3px;margin-top:8px;overflow:hidden}
 .pf{height:100%;background:linear-gradient(90deg,var(--accent),var(--green));border-radius:3px;transition:width .5s}
-.cmp{text-align:center;padding:28px}
-.cmp .ic{font-size:3.5rem;margin-bottom:12px}
-.cmp h2{font-size:1.4rem;color:var(--green);margin-bottom:10px}
-.cmp p{color:var(--dim);font-size:1rem;line-height:1.6}
-.rb{margin-top:16px;padding:14px 28px;background:var(--card);border:2px solid var(--border);border-radius:10px;color:#fff;font-family:'DM Sans',sans-serif;font-size:1rem;font-weight:700;cursor:pointer}
-
-/* === MACHINE (BELOW GUIDE) === */
-.machine-section{order:2}
+.cmp{text-align:center;padding:24px}.cmp .ic{font-size:3rem;margin-bottom:10px}.cmp h2{font-size:1.3rem;color:var(--green);margin-bottom:8px}.cmp p{color:var(--dim);font-size:.95rem;line-height:1.5}
+.rb{margin-top:12px;padding:12px 24px;background:var(--card);border:2px solid var(--border);border-radius:8px;color:#fff;font-family:'DM Sans',sans-serif;font-size:.9rem;font-weight:700;cursor:pointer}
+.ckpt{background:#1a1520;border:2px solid var(--warn);border-radius:10px;padding:12px;margin-top:10px;text-align:center}
+.ckpt-title{font-size:.9rem;font-weight:700;color:var(--warn);margin-bottom:6px}
+.ckpt-code{font-family:'JetBrains Mono',monospace;font-size:1.3rem;font-weight:700;color:#44ee55;background:#111;padding:6px 18px;border-radius:8px;display:inline-block;margin:6px 0;letter-spacing:2px}
+.ckpt-msg{font-size:.82rem;color:var(--dim);margin-bottom:10px}
+.ckpt-btns{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+.ckpt-yes{padding:12px 20px;border-radius:8px;border:2px solid var(--green);background:rgba(46,204,64,.1);color:var(--green);font-family:'DM Sans',sans-serif;font-size:.9rem;font-weight:700;cursor:pointer}
+.ckpt-no{padding:12px 20px;border-radius:8px;border:2px solid var(--accent);background:rgba(255,65,54,.08);color:var(--accent);font-family:'DM Sans',sans-serif;font-size:.9rem;font-weight:700;cursor:pointer}
+.ckpt-help{display:none;margin-top:8px;padding:10px;background:rgba(255,65,54,.08);border:1px solid rgba(255,65,54,.2);border-radius:8px;font-size:.8rem;color:var(--dim);line-height:1.4;text-align:left}.ckpt-help b{color:#fff}
 .mw{background:#d5d0c8;border-radius:12px;padding:10px;box-shadow:0 12px 40px rgba(0,0,0,.4)}
-.ml{font-size:.65rem;color:#888;text-align:center;margin-bottom:6px;text-transform:uppercase;letter-spacing:.1em;font-weight:600}
-.pnl{background:var(--panel);border:2px solid var(--pbord);border-radius:10px;padding:12px;display:flex;gap:10px;align-items:stretch}
-
-/* Left: Processing */
-.pl{display:flex;flex-direction:column;justify-content:center;gap:4px;padding:8px;border:1.5px dashed #bbb;border-radius:8px;min-width:100px}
-.plt{font-size:.55rem;font-weight:700;color:#555;text-align:center;letter-spacing:.06em;text-transform:uppercase;margin-bottom:2px}
+.ml{font-size:.6rem;color:#888;text-align:center;margin-bottom:4px;text-transform:uppercase;letter-spacing:.1em;font-weight:600}
+.pnl{background:var(--panel);border:2px solid var(--pbord);border-radius:10px;padding:10px;display:flex;gap:8px;align-items:stretch}
+.pl{display:flex;flex-direction:column;justify-content:center;gap:3px;padding:6px;border:1.5px dashed #bbb;border-radius:6px;min-width:90px}
+.plt{font-size:.5rem;font-weight:700;color:#555;text-align:center;text-transform:uppercase;margin-bottom:2px}
 .pr{display:flex;align-items:center;gap:3px;justify-content:center}
 .pg{display:flex;flex-direction:column;align-items:center;gap:1px}
-.pi{width:20px;height:20px;display:flex;align-items:center;justify-content:center}
-.pi svg{width:18px;height:18px}
-.plds{display:flex;gap:2px}
-.pld{width:4px;height:4px;border-radius:50%;background:#ddd;border:1px solid #bbb}
-.plbl{font-size:.42rem;color:#888}
-.parr{color:#bbb;font-size:.5rem}
-
-/* Center: Display */
+.pld{width:4px;height:4px;border-radius:50%;background:#ddd;border:1px solid #bbb}.plds{display:flex;gap:2px}.plbl{font-size:.4rem;color:#888}.parr{color:#bbb;font-size:.5rem}
 .pc{flex:1;display:flex;flex-direction:column;gap:4px}
-.db{border:1.5px dashed #bbb;border-radius:8px;padding:10px;display:flex;align-items:center;gap:8px;flex:1}
-.wi{display:flex;flex-direction:column;align-items:center;gap:1px}
-.wi svg{width:20px;height:20px;fill:#bbb}
-.wi span{font-size:.4rem;color:#aaa}
-.ls{flex:1;background:#111;border-radius:6px;padding:10px 12px;display:flex;align-items:center;justify-content:center;min-height:52px;box-shadow:inset 0 2px 6px rgba(0,0,0,.6);position:relative}
-.seg-display{display:flex;align-items:center;justify-content:center;min-height:36px}
-.seg-display svg{filter:drop-shadow(0 0 3px var(--glow))}
-.seg-display.ok svg{filter:drop-shadow(0 0 3px rgba(46,204,64,.35))}
-.mn{font-size:.4rem;color:#888;position:absolute;bottom:2px;right:6px}
-.dbot{display:flex;justify-content:space-between;align-items:center;padding:0 3px}
-.dl{display:flex;align-items:center;gap:2px;font-size:.4rem;color:#aaa}
-.dle{width:3px;height:3px;border-radius:50%;background:#ddd;border:1px solid #bbb}
+.db{border:1.5px dashed #bbb;border-radius:6px;padding:8px;display:flex;align-items:center;gap:6px;flex:1}
+.wi{display:flex;flex-direction:column;align-items:center;gap:1px}.wi svg{width:18px;height:18px;fill:#bbb}.wi span{font-size:.38rem;color:#aaa}
+.ls{flex:1;background:#111;border-radius:5px;padding:8px 10px;display:flex;align-items:center;justify-content:center;min-height:48px;box-shadow:inset 0 2px 6px rgba(0,0,0,.6);position:relative}
 
-/* Right: Buttons */
-.prr{display:flex;flex-direction:column;gap:5px;min-width:170px}
-.bg{border:1.5px dashed #bbb;border-radius:8px;padding:8px;display:flex;flex-direction:column;gap:5px;position:relative}
-.bgt{font-size:.48rem;font-weight:700;color:#555;text-align:center;letter-spacing:.06em;text-transform:uppercase;position:absolute;top:-7px;left:50%;transform:translateX(-50%);background:var(--panel);padding:0 6px}
-.cb{display:flex;align-items:center;gap:8px;padding:10px 12px;background:var(--panel2);border:2px solid var(--pbord);border-radius:8px;cursor:pointer;transition:all .12s;font-family:'DM Sans',sans-serif;user-select:none;position:relative;min-height:48px}
-.cb:active{background:#d5d0c7;transform:scale(.97)}
-.cb.dis{opacity:.3;cursor:default;pointer-events:none}
-.bb{width:24px;height:4px;background:#aaa;border-radius:2px;flex-shrink:0}
-.bls{flex:1}
-.bm{font-size:.9rem;font-weight:700;color:#333;display:flex;align-items:center;gap:3px}
-.bm span{font-weight:400;font-size:.6rem;color:#888}
-.bs{font-size:.6rem;color:#777;font-weight:500}
-.ba{font-size:.7rem;color:#555;flex-shrink:0}
-.ft{display:inline-block;padding:2px 6px;border-radius:4px;font-size:.55rem;font-weight:700;letter-spacing:.03em;vertical-align:middle;margin-left:3px}
-.ft.bk{background:rgba(255,65,54,.15);color:var(--accent)}
-.ft.up{background:rgba(74,158,255,.15);color:var(--blue)}
-.ft.dn{background:rgba(74,158,255,.15);color:var(--blue)}
-.ft.ok{background:rgba(46,204,64,.15);color:var(--green)}
-
-/* Highlight states - BIGGER and MORE VISIBLE */
-.cb.hl{border-color:var(--accent);background:#fff5f4;box-shadow:0 0 0 3px rgba(255,65,54,.25),0 0 14px rgba(255,65,54,.15);animation:hp 1.2s ease-in-out infinite}
-.cb.hw{border-color:var(--warn);background:#fffaf0;box-shadow:0 0 0 3px rgba(244,166,35,.3),0 0 14px rgba(244,166,35,.2);animation:hw 1.2s ease-in-out infinite}
-@keyframes hp{0%,100%{box-shadow:0 0 0 3px rgba(255,65,54,.25),0 0 14px rgba(255,65,54,.15)}50%{box-shadow:0 0 0 5px rgba(255,65,54,.35),0 0 20px rgba(255,65,54,.25)}}
-@keyframes hw{0%,100%{box-shadow:0 0 0 3px rgba(244,166,35,.3),0 0 14px rgba(244,166,35,.2)}50%{box-shadow:0 0 0 5px rgba(244,166,35,.4),0 0 20px rgba(244,166,35,.3)}}
-
-/* "APERTE AQUI" badge */
-.hl-badge{position:absolute;bottom:-10px;right:8px;background:var(--accent);color:#fff;font-size:.6rem;font-weight:700;padding:3px 8px;border-radius:4px;animation:badge 1.2s ease-in-out infinite;white-space:nowrap;z-index:2}
-.hl-badge.warn-badge{background:var(--warn)}
-@keyframes badge{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
-
-/* Start button */
-.sa{display:flex;gap:6px;align-items:stretch;margin-top:3px}
-.sb{flex:1;padding:12px 14px;background:var(--panel2);border:2px solid var(--pbord);border-radius:8px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .12s;user-select:none;display:flex;align-items:center;gap:8px;min-height:52px;position:relative}
+.seg-display.blink{animation:segBlink 1s ease-in-out infinite}
+@keyframes segBlink{0%,100%{opacity:1}50%{opacity:.3}}
+.seg-display{display:flex;align-items:center;justify-content:center;min-height:32px}
+.seg-display svg{filter:drop-shadow(0 0 3px var(--glow))}.seg-display.ok svg{filter:drop-shadow(0 0 3px rgba(46,204,64,.35))}
+.mn{font-size:.38rem;color:#888;position:absolute;bottom:2px;right:5px}
+.dbot{display:flex;justify-content:space-between;padding:0 3px;font-size:.38rem;color:#aaa}
+.prr{display:flex;flex-direction:column;gap:4px;min-width:160px}
+.bg{border:1.5px dashed #bbb;border-radius:6px;padding:6px;display:flex;flex-direction:column;gap:4px;position:relative}
+.bgt{font-size:.42rem;font-weight:700;color:#555;text-align:center;text-transform:uppercase;position:absolute;top:-6px;left:50%;transform:translateX(-50%);background:var(--panel);padding:0 4px}
+.cb{display:flex;align-items:center;gap:6px;padding:8px 10px;background:var(--panel2);border:2px solid var(--pbord);border-radius:6px;cursor:pointer;transition:all .12s;font-family:'DM Sans',sans-serif;user-select:none;position:relative;min-height:44px}
+.cb:active{background:#d5d0c7;transform:scale(.97)}.cb.dis{opacity:.3;cursor:default;pointer-events:none}
+.bb{width:20px;height:3px;background:#aaa;border-radius:2px;flex-shrink:0}.bls{flex:1}
+.bm{font-size:.82rem;font-weight:700;color:#333}.bm span{font-weight:400;font-size:.55rem;color:#888}
+.bs{font-size:.52rem;color:#777;font-weight:500}.ba{font-size:.6rem;color:#555;flex-shrink:0}
+.ft{display:inline-block;padding:1px 4px;border-radius:3px;font-size:.48rem;font-weight:700;vertical-align:middle;margin-left:2px}
+.ft.bk{background:rgba(255,65,54,.15);color:var(--accent)}.ft.up{background:rgba(74,158,255,.15);color:var(--blue)}.ft.dn{background:rgba(74,158,255,.15);color:var(--blue)}.ft.ok{background:rgba(46,204,64,.15);color:var(--green)}
+.cb.hl{border-color:var(--accent);background:#fff5f4;box-shadow:0 0 0 3px rgba(255,65,54,.25);animation:hp 1.2s ease-in-out infinite}
+.cb.hw{border-color:var(--warn);background:#fffaf0;box-shadow:0 0 0 3px rgba(244,166,35,.3);animation:hw 1.2s ease-in-out infinite}
+@keyframes hp{0%,100%{box-shadow:0 0 0 3px rgba(255,65,54,.25)}50%{box-shadow:0 0 0 5px rgba(255,65,54,.35)}}
+@keyframes hw{0%,100%{box-shadow:0 0 0 3px rgba(244,166,35,.3)}50%{box-shadow:0 0 0 5px rgba(244,166,35,.4)}}
+.hl-badge{position:absolute;bottom:-10px;right:8px;background:var(--accent);color:#fff;font-size:.55rem;font-weight:700;padding:2px 6px;border-radius:4px;animation:bdg 1.2s ease-in-out infinite;white-space:nowrap;z-index:2}
+.hl-badge.wb{background:var(--warn)}
+@keyframes bdg{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
+.sa{display:flex;gap:6px;align-items:stretch;margin-top:2px}
+.sb{flex:1;padding:10px 12px;background:var(--panel2);border:2px solid var(--pbord);border-radius:6px;cursor:pointer;font-family:'DM Sans',sans-serif;user-select:none;display:flex;align-items:center;gap:6px;min-height:48px;position:relative}
 .sb:active{background:#d5d0c7;transform:scale(.97)}
-.sb.hl{border-color:var(--green);background:#f0fff4;box-shadow:0 0 0 3px rgba(46,204,64,.25),0 0 14px rgba(46,204,64,.15);animation:hg 1.2s ease-in-out infinite}
+.sb.hl{border-color:var(--green);background:#f0fff4;box-shadow:0 0 0 3px rgba(46,204,64,.25);animation:hg 1.2s ease-in-out infinite}
 .sb .hl-badge{background:var(--green)}
-@keyframes hg{0%,100%{box-shadow:0 0 0 3px rgba(46,204,64,.25),0 0 14px rgba(46,204,64,.15)}50%{box-shadow:0 0 0 5px rgba(46,204,64,.35),0 0 20px rgba(46,204,64,.25)}}
-.cpg{padding:6px 8px;background:var(--panel2);border:1.5px solid var(--pbord);border-radius:6px;font-size:.5rem;font-weight:600;color:#777;text-align:center;line-height:1.2;display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:60px;cursor:default;opacity:.35}
-
-/* Hold button */
-.ho{display:none;margin-top:6px}
-.ho.sh{display:block}
-.hb{width:100%;padding:16px;background:linear-gradient(135deg,var(--warn),#e6950a);border:none;border-radius:10px;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:1rem;font-weight:700;color:#fff;animation:hw 1.2s ease-in-out infinite}
+@keyframes hg{0%,100%{box-shadow:0 0 0 3px rgba(46,204,64,.25)}50%{box-shadow:0 0 0 5px rgba(46,204,64,.35)}}
+.cpg{padding:4px 6px;background:var(--panel2);border:1.5px solid var(--pbord);border-radius:5px;font-size:.45rem;font-weight:600;color:#777;text-align:center;min-width:50px;cursor:default;opacity:.35}
+.ho{display:none;margin-top:5px}.ho.sh{display:block}
+.hb{width:100%;padding:14px;background:linear-gradient(135deg,var(--warn),#e6950a);border:none;border-radius:8px;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:.95rem;font-weight:700;color:#fff;animation:hw 1.2s ease-in-out infinite}
 .hb:active{filter:brightness(.9);transform:scale(.97)}
-
-
-
-.ckpt{background:#1a1520;border:2px solid var(--warn);border-radius:10px;padding:14px;margin-bottom:8px;text-align:center}
-.ckpt-title{font-size:.95rem;font-weight:700;color:var(--warn);margin-bottom:8px}
-.ckpt-code{font-family:'JetBrains Mono',monospace;font-size:1.4rem;font-weight:700;color:#44ee55;background:#111;padding:8px 20px;border-radius:8px;display:inline-block;margin:8px 0;letter-spacing:2px}
-.ckpt-msg{font-size:.85rem;color:var(--dim);margin-bottom:12px;line-height:1.5}
-.ckpt-btns{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
-.ckpt-yes{padding:12px 24px;border-radius:8px;border:2px solid var(--green);background:rgba(46,204,64,.12);color:var(--green);font-family:'DM Sans',sans-serif;font-size:.9rem;font-weight:700;cursor:pointer;min-width:140px}
-.ckpt-yes:active{transform:scale(.95)}
-.ckpt-no{padding:12px 24px;border-radius:8px;border:2px solid var(--accent);background:rgba(255,65,54,.08);color:var(--accent);font-family:'DM Sans',sans-serif;font-size:.9rem;font-weight:700;cursor:pointer;min-width:140px}
-.ckpt-no:active{transform:scale(.95)}
-.ckpt-help{display:none;margin-top:10px;padding:10px;background:rgba(255,65,54,.08);border:1px solid rgba(255,65,54,.2);border-radius:8px;font-size:.82rem;color:var(--dim);line-height:1.5;text-align:left}
-.ckpt-help b{color:#fff}
-
-/* Flash feedback */
-@keyframes flash{0%{opacity:1}50%{opacity:.3}100%{opacity:1}}
-.flash{animation:flash .2s ease-out}
-
-/* Mobile */
-@media(max-width:640px){
-  .pnl{flex-direction:column}
-  .pl{flex-direction:row;min-width:auto}
-  .prr{min-width:auto}
-  .cb{min-height:52px}
-  .sb{min-height:56px}
-  .gt{font-size:1.15rem}
-  .gd{font-size:.95rem}
-}
+.ext-hdr{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;background:var(--card);border:2px solid var(--border);border-radius:10px;cursor:pointer;user-select:none;margin-top:12px}
+.ext-hdr:active{background:#1e1e2a}
+.ext-body{display:none;margin-top:8px}.ext-body.open{display:block}
+.ext-card{background:var(--card);border:2px solid var(--border);border-radius:10px;padding:14px}
+.ext-card h3{font-size:1rem;font-weight:700;color:var(--accent);margin-bottom:6px}
+.ext-card p{font-size:.85rem;color:var(--dim);line-height:1.5;margin-bottom:12px}
+.ext-btn{width:100%;padding:14px;border-radius:10px;border:2px solid var(--accent);background:rgba(255,65,54,.08);color:var(--accent);font-family:'DM Sans',sans-serif;font-size:1rem;font-weight:700;cursor:pointer}
+.ext-btn:active{transform:scale(.97)}
+@media(max-width:640px){.pnl{flex-direction:column}.pl{flex-direction:row;min-width:auto}.prr{min-width:auto}}
 </style>
 </head>
 <body>
 <div class="app" id="app"></div>
 <script>
 const T=[
-{id:'entry',label:'Entrar no Modo de Configuração',steps:[
-{t:'Entrar no Modo de Configuração',d:'A máquina está em espera. Precisamos entrar no modo de configuração.',a:'Segure <b>Quente (1º)</b> + <b>Frio (3º)</b> por 5 segundos',at:'warn',hl:['hot','cold'],hold:true,td:'00:00'},
-{t:'Selecionar código 03',d:'O display mostra <code>00:00</code>. Pressione o botão <b>Morno</b> para avançar até <code>03</code>.',a:'Pressione <b>Morno</b> (▲ Subir) 3 vezes',at:'',hl:['warm'],td:'03',mp:{b:'warm',n:3,s:['01','02','03']}},
-{t:'Confirmar entrada',d:'O display mostra <code>03</code>. Pressione <b>Iniciar</b> para entrar no modo de configuração.',a:'Pressione <b>Iniciar</b> (OK)',at:'green',hl:['start'],td:'L9CI'},
-{t:'Ir para o menu tE5t',d:'Você entrou no modo de configuração (<code>L9CI</code>). <b>⚠ NÃO aperte Iniciar aqui!</b> Pressione <b>Quente</b> (Voltar).',a:'Pressione <b>Quente</b> (← Voltar)',at:'',hl:['hot'],td:'tE5t'},
-{t:'Ir para o menu 5tUP',d:'O display mostra <code>tE5t</code>. Pressione <b>Morno</b> para ir ao menu de configurações.',a:'Pressione <b>Morno</b> (▲ Subir)',at:'',hl:['warm'],td:'5tUP'},
-{t:'Entrar no menu 5tUP',d:'O display mostra <code>5tUP</code>. Pressione <b>Iniciar</b> para entrar.',a:'Pressione <b>Iniciar</b> (OK)',at:'green',hl:['start'],td:'r9Pr'},
+{id:'entry',label:'Entrar',steps:[
+{t:'Entrar no Modo de Configuração',d:'A máquina está em espera. Segure os botões indicados por 5 segundos.',a:'Segure <b>Quente (1º)</b> + <b>Frio (3º)</b> por 5 segundos',at:'warn',hl:['hot','cold'],hold:1,td:'00:00'},
+{t:'Selecionar código 03',d:'O display mostra <code>00:00</code>. Pressione <b>Morno</b> 3 vezes.',a:'Pressione <b>Morno</b> (▲) 3 vezes',hl:['warm'],td:'03',mp:{b:'warm',n:3,s:['01','02','03']}},
+{t:'Confirmar entrada',d:'O display mostra <code>03</code>. Pressione <b>Iniciar</b>.',a:'Pressione <b>Iniciar</b> (OK)',at:'green',hl:['start'],td:'L9CI'},
+{t:'Ir para tE5t',d:'Modo de configuração ativado (<code>L9CI</code>). <b>⚠ NÃO aperte Iniciar aqui!</b>',a:'Pressione <b>Quente</b> (← Voltar)',hl:['hot'],td:'tE5t'},
+{t:'Ir para 5tUP',d:'Pressione <b>Morno</b> para ir ao menu de configurações.',a:'Pressione <b>Morno</b> (▲)',hl:['warm'],td:'5tUP'},
+{t:'Entrar no menu 5tUP',d:'Pressione <b>Iniciar</b> para entrar.',a:'Pressione <b>Iniciar</b> (OK)',at:'green',hl:['start'],td:'r9Pr'},
+{t:'Navegar até t4PE',d:'Pressione <b>Morno</b> ou <b>Frio</b> até encontrar <code>t4PE</code>.',a:'Pressione <b>Morno</b> (▲) até <b>t4PE</b>',hl:['warm'],td:'t4PE'},
+{t:'Entrar em t4PE',d:'Pressione <b>Iniciar</b> para entrar.',a:'Pressione <b>Iniciar</b> (OK)',at:'green',hl:['start'],td:'Pdtd',cf:'t4PE'},
 ]},
 {id:'pdtd',label:'Seção 1: PAY',steps:[
-{t:'Navegar até t4PE',d:'Estamos no submenu (<code>r9Pr</code>). Pressione <b>Morno</b> ou <b>Frio</b> várias vezes até encontrar <code>t4PE</code>.',a:'Pressione <b>Morno</b> (▲) até aparecer <b>t4PE</b>',at:'',hl:['warm'],td:'t4PE'},
-{t:'Entrar em t4PE',d:'O display mostra <code>t4PE</code>. Pressione <b>Iniciar</b> para entrar.',a:'Pressione <b>Iniciar</b> (OK)',at:'green',hl:['start'],td:'Pdtd',cf:'t4PE'},
-{t:'Abrir Pdtd',d:'O display mostra <code>Pdtd</code> (Tipo de Produto). Pressione <b>Iniciar</b> para ver o valor atual.',a:'Pressione <b>Iniciar</b> (OK)',at:'green',hl:['start'],td:'FrEE'},
-{t:'Selecionar PAY',d:'O display mostra <code>FrEE</code> (gratuito). Pressione <b>Morno</b> para mudar para <code>PAY</code>.',a:'Pressione <b>Morno</b> (▲) para selecionar <b>PAY</b>',at:'',hl:['warm'],td:'PAY'},
+{t:'Abrir Pdtd',d:'O display mostra <code>Pdtd</code>. Pressione <b>Iniciar</b> para ver o valor.',a:'Pressione <b>Iniciar</b> (OK)',at:'green',hl:['start'],td:'FrEE'},
+{t:'Selecionar PAY',d:'O display mostra <code>FrEE</code>. Pressione <b>Morno</b> para mudar para <code>PAY</code>.',a:'Pressione <b>Morno</b> (▲) → <b>PAY</b>',hl:['warm'],td:'PAY'},
 {t:'Confirmar PAY ✓',d:'O display mostra <code>PAY</code>. Pressione <b>Iniciar</b> para salvar.',a:'Pressione <b>Iniciar</b> (OK) para salvar',at:'green',hl:['start'],td:'✓ PAY',cf:'PAY'},
 ]},
 {id:'uend',label:'Seção 2: Coin',steps:[
-{t:'Passar por Pdtd',d:'Configuração PAY salva! Continuamos dentro de <code>t4PE</code>. O display mostra <code>Pdtd</code> (já configurado). Avance até <code>UEnd</code>.',a:'Pressione <b>Morno</b> (▲) para avançar',at:'',hl:['warm'],td:'Loc1',sd:'Pdtd'},
-{t:'Passar por Loc1',d:'O display mostra <code>Loc1</code> (Tipo de unidade monetária). Não é este. Continue avançando.',a:'Pressione <b>Morno</b> (▲) para avançar',at:'',hl:['warm'],td:'UEnd'},
-{t:'Encontramos UEnd!',d:'O display mostra <code>UEnd</code> (Tipo de Venda). <b>Este é o menu correto!</b> Pressione <b>Iniciar</b> para entrar.',a:'Pressione <b>Iniciar</b> (OK) para entrar',at:'green',hl:['start'],td:'CArd',cf:'UEnd'},
-{t:'Selecionar Coin',d:'O display mostra <code>CArd</code> (Cartão). Pressione <b>Morno</b> para mudar para <code>CoIn</code>.',a:'Pressione <b>Morno</b> (▲) para selecionar <b>CoIn</b> (Moeda)',at:'',hl:['warm'],td:'CoIn'},
-{t:'Confirmar Coin ✓',d:'O display mostra <code>CoIn</code>. Pressione <b>Iniciar</b> para salvar.',a:'Pressione <b>Iniciar</b> (OK) para salvar',at:'green',hl:['start'],td:'✓ CoIn',cf:'CoIn'},
+{t:'Passar por Pdtd',d:'PAY salvo! Avance até <code>UEnd</code>.',a:'Pressione <b>Morno</b> (▲)',hl:['warm'],td:'Loc1',sd:'Pdtd'},
+{t:'Passar por Loc1',d:'<code>Loc1</code> — não é este. Continue.',a:'Pressione <b>Morno</b> (▲)',hl:['warm'],td:'UEnd'},
+{t:'Encontramos UEnd!',d:'<code>UEnd</code> = Tipo de Venda. Pressione <b>Iniciar</b>.',a:'Pressione <b>Iniciar</b> (OK)',at:'green',hl:['start'],td:'CArd',cf:'UEnd'},
+{t:'Selecionar CoIn',d:'O display mostra <code>CArd</code>. Pressione <b>Morno</b> para <code>CoIn</code>.',a:'Pressione <b>Morno</b> (▲) → <b>CoIn</b>',hl:['warm'],td:'CoIn'},
+{t:'Confirmar CoIn ✓',d:'O display mostra <code>CoIn</code>. Pressione <b>Iniciar</b> para salvar.',a:'Pressione <b>Iniciar</b> (OK) para salvar',at:'green',hl:['start'],td:'✓ CoIn',cf:'CoIn'},
 ]},
 {id:'co1',label:'Seção 3: Valor',steps:[
-{t:'Voltar ao menu 5tUP',d:'Configuração CoIn salva! Pressione <b>Quente</b> (Voltar) para sair do t4PE e voltar ao menu 5tUP. Os itens <code>t4PE</code>, <code>Co1</code> e <code>r9Pr</code> estão todos neste mesmo nível.',a:'Pressione <b>Quente</b> (← Voltar)',at:'',hl:['hot'],td:'t4PE',sd:'UEnd'},
-{t:'Navegar até Co1',d:'Estamos no menu 5tUP (Setup). Pressione <b>Morno</b> ou <b>Frio</b> várias vezes até encontrar <code>Co1</code>.',a:'Pressione <b>Morno</b> (▲) até aparecer <b>Co1</b>',at:'',hl:['warm'],td:'Co1'},
-{t:'Entrar em Co1',d:'O display mostra <code>Co1</code> (Valor da moeda). Pressione <b>Iniciar</b> para ver o valor atual.',a:'Pressione <b>Iniciar</b> (OK)',at:'green',hl:['start'],td:'0100',cf:'Co1'},
-{t:'Ajustar para 1000',d:'Use <b>Morno</b> (▲) para aumentar até <code>1000</code> (= R$10,00). Na simulação, cada clique pula alguns valores.',a:'Pressione <b>Morno</b> (▲) até mostrar <b>1000</b>',at:'',hl:['warm'],td:'1000',mp:{b:'warm',n:5,s:['0200','0400','0600','0800','1000']}},
-{t:'Confirmar valor ✓',d:'O display mostra <code>1000</code> (R$10,00). Pressione <b>Iniciar</b> para salvar.',a:'Pressione <b>Iniciar</b> (OK) para salvar',at:'green',hl:['start'],td:'✓ 1000',cf:'1000'},
+{t:'Voltar ao menu 5tUP',d:'CoIn salvo! Pressione <b>Quente</b> (Voltar) para sair do t4PE.',a:'Pressione <b>Quente</b> (← Voltar)',hl:['hot'],td:'t4PE',sd:'UEnd'},
+{t:'Navegar até Co1',d:'Estamos no menu 5tUP. Navegue até <code>Co1</code>.',a:'Pressione <b>Morno</b> (▲) até <b>Co1</b>',hl:['warm'],td:'Co1'},
+{t:'Entrar em Co1',d:'<code>Co1</code> = Valor da moeda. Pressione <b>Iniciar</b>.',a:'Pressione <b>Iniciar</b> (OK)',at:'green',hl:['start'],td:'0100',cf:'Co1'},
+{t:'Ajustar para 1000',d:'Use <b>Morno</b> (▲) para aumentar até <code>1000</code> (R$10,00).',a:'Pressione <b>Morno</b> (▲) até <b>1000</b>',hl:['warm'],td:'1000',mp:{b:'warm',n:5,s:['0200','0400','0600','0800','1000']}},
+{t:'Confirmar valor ✓',d:'O display mostra <code>1000</code>. Pressione <b>Iniciar</b> para salvar.',a:'Pressione <b>Iniciar</b> (OK) para salvar',at:'green',hl:['start'],td:'✓ 1000',cf:'1000'},
 ]},
-{id:'exit',label:'Sair do Modo de Configuração',steps:[
-{t:'Voltar ao menu 5tUP',d:'Valor salvo! O display mostra <code>P1Po</code> (próximo item do menu). Pressione <b>Quente</b> (Voltar) para voltar ao menu 5tUP.',a:'Pressione <b>Quente</b> (← Voltar)',at:'',hl:['hot'],td:'5tUP',sd:'P1Po'},
-{t:'Sair do modo de configuração',d:'Estamos em <code>5tUP</code>. Pressione <b>Quente</b> (Voltar) para sair completamente. A máquina volta ao modo de espera.',a:'Pressione <b>Quente</b> (← Voltar) para sair',at:'',hl:['hot'],td:'PUSH'},
+{id:'exit',label:'Sair',steps:[
+{t:'Voltar ao menu 5tUP',d:'Valor salvo! O display mostra <code>P1Po</code>. Pressione <b>Quente</b> (Voltar).',a:'Pressione <b>Quente</b> (← Voltar)',hl:['hot'],td:'5tUP',sd:'P1Po'},
+{t:'Sair do modo de configuração',d:'Pressione <b>Quente</b> (Voltar) para sair completamente.',a:'Pressione <b>Quente</b> (← Voltar) para sair',hl:['hot'],td:'PUSH'},
 ]},
 ];
-let cT=0,cS=0,disp='PUSH',pC=0,done=new Set(),allDone=false,confirmed=false;
+const K=[
+{t:'Selecionar um ciclo',d:'O display está piscando <code>PUSH</code>. Selecione um ciclo. <b>Na simulação, clique em Quente.</b>',a:'Pressione <b>Quente</b> (selecionar ciclo)',hl:['hot'],td:'45:00',blink:1},
+{t:'Iniciar o ciclo',d:'O display mostra <code>45:00</code> (tempo do ciclo). Pressione <b>Iniciar</b> para ligar a máquina.',a:'Pressione <b>Iniciar</b> para ligar',at:'green',hl:['start'],td:'45:00'},
+{t:'Pausar o ciclo',d:'A máquina está rodando e o tempo está passando. Pressione <b>Iniciar</b> novamente para <b>pausar</b> a máquina.',a:'Pressione <b>Iniciar</b> para pausar',at:'green',hl:['start'],td:'',tmr:1},
+{t:'Entrar no modo de configuração',d:'Máquina pausada. Segure <b>Quente + Frio</b> por 5 segundos.',a:'Segure <b>Quente (1º)</b> + <b>Frio (3º)</b> por 5 segundos',at:'warn',hl:['hot','cold'],hold:1,td:'00:00'},
+{t:'Digitar a senha 03',d:'O display mostra <code>00:00</code>. Pressione <b>Morno</b> (▲) 3 vezes até <code>03</code>.',a:'Pressione <b>Morno</b> (▲) 3 vezes',hl:['warm'],td:'03',mp:{b:'warm',n:3,s:['01','02','03']}},
+{t:'Confirmar entrada',d:'O display mostra <code>03</code>. Pressione <b>Iniciar</b> para entrar.',a:'Pressione <b>Iniciar</b> (OK)',at:'green',hl:['start'],td:'L9CI'},
+{t:'Navegar até hILL',d:'Pressione <b>Morno</b> (▲) até <code>hILL</code>.',a:'Pressione <b>Morno</b> (▲) até <b>hILL</b>',hl:['warm'],td:'hILL'},
+{t:'Confirmar hILL',d:'<code>hILL</code> = Ciclo de higienização. Pressione <b>Iniciar</b>.',a:'Pressione <b>Iniciar</b> (OK)',at:'green',hl:['start'],td:'00:00',cf:'hILL'},
+{t:'Ajustar tempo',d:'O display mostra <code>00:00</code>. Pressione <b>Morno</b> (▲) até <code>00:17</code>.',a:'Pressione <b>Morno</b> (▲) até <b>00:17</b>',hl:['warm'],td:'00:17',mp:{b:'warm',n:3,s:['00:05','00:10','00:17']}},
+{t:'Confirmar cancelamento',d:'O display mostra <code>00:17</code>. Pressione <b>Iniciar</b> para confirmar o cancelamento.',a:'Pressione <b>Iniciar</b> (OK) para confirmar',at:'green',hl:['start'],td:'End',cf:'00:17'},
+{t:'Ciclo cancelado!',d:'Ciclo cancelado com sucesso! A máquina voltará ao modo de espera em instantes...',a:'⏳ Aguarde 3 segundos...',at:'green',auto:1,td:'PUSH'},
+];
+let cT=0,cS=0,disp='PUSH',pC=0,done=new Set(),allDone=false,cfd=false;
+let km=false,ks=0,kd='PUSH',kc=false,eo=false,kDone=false,tmr=null,tmrSec=2700;
 function gs(){return allDone?null:T[cT]?.steps[cS]||null}
-function vib(ms){try{navigator.vibrate&&navigator.vibrate(ms||30)}catch(e){}}
-
-
-function adv(){vib(50);confirmed=false;const t=T[cT];if(cS<t.steps.length-1){cS++;pC=0;const n=gs();if(n?.sd)disp=n.sd}else{done.add(cT);if(cT<T.length-1){cT++;cS=0;pC=0;const n=gs();if(n?.sd)disp=n.sd}else{allDone=true;disp='PUSH';vib([50,50,100])}}render()}
-
-function confirmStep(){vib(30);confirmed=true;render();}
-function denyStep(){vib(20);const el=document.getElementById('ckpt-help');if(el)el.style.display='block';}
-function hBtn(id){const s=gs();if(!s||s.hold)return;if(s.cf&&!confirmed&&id==='start')return;vib(20);if(s.mp){if(id===s.mp.b){if(pC<s.mp.n-1){disp=s.mp.s[pC];pC++;render();return}else{disp=s.mp.s[s.mp.n-1];pC=0;adv();return}}return}if(!s.hl?.includes(id))return;disp=s.td;adv()}
-function hHold(){const s=gs();if(!s?.hold)return;vib([30,30,30,30,100]);disp=s.td;adv()}
-function hStart(){hBtn('start')}
-function selT(i){if(i>0&&!done.has(i-1))return;vib(20);confirmed=false;cT=i;cS=0;pC=0;allDone=false;const s=gs();if(s?.sd)disp=s.sd;else if(i===0)disp='PUSH';render()}
-function reset(){vib(30);confirmed=false;cT=0;cS=0;pC=0;disp='PUSH';done.clear();allDone=false;render()}
+function vib(m){try{navigator.vibrate&&navigator.vibrate(m||30)}catch(e){}}
+function adv(){vib(50);cfd=false;const t=T[cT];if(cS<t.steps.length-1){cS++;pC=0;const n=gs();if(n?.sd)disp=n.sd}else{done.add(cT);if(cT<T.length-1){cT++;cS=0;pC=0;const n=gs();if(n?.sd)disp=n.sd}else{allDone=true;disp='PUSH';vib([50,50,100])}}R()}
+function hB(id){if(km){kB(id);return}const s=gs();if(!s||s.hold)return;if(s.cf&&!cfd&&id==='start')return;vib(20);if(s.mp){if(id===s.mp.b){if(pC<s.mp.n-1){disp=s.mp.s[pC];pC++;R();return}else{disp=s.mp.s[s.mp.n-1];pC=0;adv();return}}return}if(!s.hl?.includes(id))return;disp=s.td;adv()}
+function hH(){if(km){kH();return}const s=gs();if(!s?.hold)return;vib([30,30,30,30,100]);disp=s.td;adv()}
+function hS(){hB('start')}
+function cfm(){vib(30);cfd=true;R()}
+function deny(){vib(20);var e=document.getElementById('ckh');if(e)e.style.display='block'}
+function selT(i){if(i>0&&!done.has(i-1))return;vib(20);cfd=false;cT=i;cS=0;pC=0;allDone=false;const s=gs();if(s?.sd)disp=s.sd;else if(i===0)disp='PUSH';R()}
+function rst(){vib(30);cfd=false;cT=0;cS=0;pC=0;disp='PUSH';done.clear();allDone=false;R()}
 function totS(){return T.reduce((a,t)=>a+t.steps.length,0)}
 function dneS(){let d=0;for(let i=0;i<T.length;i++){if(done.has(i))d+=T[i].steps.length;else if(i===cT)d+=cS}return d}
-function hl(id){const s=gs();if(!s)return'';if(s.hold&&(id==='hot'||id==='cold'))return'hw';if(s.cf&&!confirmed&&id==='start')return'';if(s.hl?.includes(id))return'hl';return''}
-function badge(id){const s=gs();if(!s)return'';if(s.hold&&(id==='hot'||id==='cold'))return'<div class="hl-badge warn-badge">👆 SEGURE AQUI</div>';if(s.cf&&!confirmed&&id==='start')return'';if(s.hl?.includes(id)){const isStart=id==='start';return`<div class="hl-badge"${isStart?' style="background:var(--green)"':''}>👆 APERTE AQUI</div>`;}return'';}
+function kB(id){const s=K[ks];if(!s||s.hold)return;if(s.cf&&!kc&&id==='start')return;vib(20);if(s.mp){if(id===s.mp.b){if(pC<s.mp.n-1){kd=s.mp.s[pC];pC++;R();return}else{kd=s.mp.s[s.mp.n-1];pC=0;kA();return}}return}if(!s.hl?.includes(id))return;if(!s.tmr)kd=s.td;kA()}
+function kH(){const s=K[ks];if(!s?.hold)return;vib([30,30,30,30,100]);kd=s.td;kA()}
+function startTmr(){tmrSec=2700;updTmr();tmr=setInterval(function(){tmrSec--;if(tmrSec<=0){tmrSec=0;clearInterval(tmr);tmr=null;}updTmr()},1000);}
+function stopTmr(){if(tmr){clearInterval(tmr);tmr=null;}}
+function updTmr(){var m=Math.floor(tmrSec/60),s=tmrSec%60;kd=(m<10?'0':'')+m+':'+(s<10?'0':'')+s;var el=document.querySelector('.seg-display');if(el)el.innerHTML=seg(kd,false);}
+function kA(){vib(50);kc=false;pC=0;stopTmr();if(ks<K.length-1){ks++;var step=K[ks];if(step&&step.tmr){startTmr();R();return;}if(step&&step.auto){playLgMelody();R();setTimeout(function(){kd='PUSH';kDone=true;vib([50,50,100]);R()},3000);return;}}else{km=false;ks=0;kd='PUSH';}R()}
+function kcf(){vib(30);kc=true;R()}
+function kdn(){vib(20);var e=document.getElementById('kch');if(e)e.style.display='block'}
+function skm(){km=true;ks=0;kd='PUSH';kc=false;pC=0;vib(30);R()}
+function exk(){stopTmr();km=false;ks=0;kd='PUSH';kc=false;kDone=false;vib(20);R()}
+function tge(){eo=!eo;vib(20);R()}
 
-const W=`<svg viewBox="0 0 24 24"><path d="M12 18c-.55 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1zm-4.24-2.76a6.003 6.003 0 0 1 8.49 0l1.41-1.41a8.003 8.003 0 0 0-11.31 0l1.41 1.41zm-2.83-2.83a10.003 10.003 0 0 1 14.14 0l1.41-1.41c-4.69-4.69-12.28-4.69-16.97 0l1.42 1.41z"/></svg>`;
-const WI=`<svg viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="1.5"><rect x="5" y="5" width="14" height="14" rx="2"/><circle cx="12" cy="12" r="4"/><path d="M9 9l6 6M15 9l-6 6" stroke-width="1"/></svg>`;
+const SM={'0':'abcdef','1':'bc','2':'abdeg','3':'abcdg','4':'bcfg','5':'acdfg','6':'acdefg','7':'abc','8':'abcdefg','9':'abcdfg','A':'abcefg','a':'abcefg','b':'cdefg','C':'adef','d':'bcdeg','E':'adefg','e':'adefg','F':'aefg','G':'acdef','H':'bcefg','h':'cefg','I':'bc','i':'c','J':'bcd','L':'def','n':'ceg','O':'abcdef','o':'cdeg','P':'abefg','r':'eg','S':'acdfg','t':'defg','U':'bcdef','u':'cde','Y':'bcfg','-':'g',' ':'',':':'co'};
+function seg(tx,ok){
+const on=ok?'#22dd44':'#44ee55',off='#0a1a0a',cs=tx.split(''),cw=26,H=44,gap=16,sk=4,tw=4.5,W=cs.length*(cw+gap)+sk+6;
+let v=`<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg">`;
+cs.forEach((c,i)=>{const ox=i*(cw+gap)+3,sg=SM[c]||'';
+if(c===':'){v+=`<rect x="${ox+6}" y="13" width="5" height="5" rx="1" fill="${on}"/><rect x="${ox+6}" y="28" width="5" height="5" rx="1" fill="${on}"/>`;return}
+if(c===' ')return;const m=1.5,tp=2,md=H/2,bt=H-2;
+function sx(x,y){return x+(md-y)/md*sk}
+function hs(l,r,y){const h=tw/2;return`${sx(l+m+h,y)},${y} ${sx(l+m+tw,y-h)},${y-h} ${sx(r-m-tw,y-h)},${y-h} ${sx(r-m-h,y)},${y} ${sx(r-m-tw,y+h)},${y+h} ${sx(l+m+tw,y+h)},${y+h}`}
+function vs(x,y1,y2){const h=tw/2,ym=(y1+y2)/2;return`${sx(x,y1+m)},${y1+m} ${sx(x+h,y1+m+h)},${y1+m+h} ${sx(x+h,ym)},${ym} ${sx(x+h,y2-m-h)},${y2-m-h} ${sx(x,y2-m)},${y2-m} ${sx(x-h,ym)},${ym}`}
+const l=ox,r=ox+cw,S={a:hs(l,r,tp),b:vs(r,tp,md),c:vs(r,md,bt),d:hs(l,r,bt),e:vs(l,md,bt),f:vs(l,tp,md),g:hs(l,r,md)};
+for(const[k,p]of Object.entries(S))v+=`<polygon points="${p}" fill="${off}" opacity=".5"/>`;
+for(const[k,p]of Object.entries(S))if(sg.includes(k))v+=`<polygon points="${p}" fill="${on}"/>`;
+});return v+'</svg>'}
 
-const SEG_MAP={
-'0':'abcdef','1':'bc','2':'abdeg','3':'abcdg','4':'bcfg','5':'acdfg','6':'acdefg','7':'abc',
-'8':'abcdefg','9':'abcdfg','A':'abcefg','a':'abcefg','B':'acdefg','b':'cdefg','C':'adef',
-'c':'deg','D':'bcdeg','d':'bcdeg','E':'adefg','e':'adefg','F':'aefg','f':'aefg',
-'G':'acdef','g':'abcdfg','H':'bcefg','h':'cefg','I':'bc','i':'c','J':'bcd','j':'bcd',
-'L':'def','l':'def','N':'abcef','n':'ceg','O':'abcdef','o':'cdeg','P':'abefg','p':'abefg',
-'Q':'abcfg','q':'abcfg','R':'eg','r':'eg','S':'acdfg','s':'acdfg','T':'defg','t':'defg',
-'U':'bcdef','u':'cde','V':'bcdef','v':'cde','Y':'bcfg','y':'bcfg','-':'g','_':'d',
-' ':'','.':'dp',':':'co','\u2713':'abcfg'
-};
+const WF='<svg viewBox="0 0 24 24"><path d="M12 18c-.55 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1zm-4.24-2.76a6 6 0 018.49 0l1.41-1.41a8 8 0 00-11.31 0l1.41 1.41zm-2.83-2.83a10 10 0 0114.14 0l1.41-1.41c-4.69-4.69-12.28-4.69-16.97 0l1.42 1.41z"/></svg>';
+const WI='<svg viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="1.5"><rect x="5" y="5" width="14" height="14" rx="2"/><circle cx="12" cy="12" r="4"/></svg>';
 
-function segSVG(text, isOk) {
-  const on = isOk ? '#22dd44' : '#44ee55';
-  const off = isOk ? '#0a1a0a' : '#0a1a0a';
-  const chars = text.split('');
-  const cw = 26, ch = 44, gap = 16, sk = 4, tw = 4.5;
-  const totalW = chars.length * (cw + gap) + sk + 6;
-  let svg = `<svg width="${totalW}" height="${ch}" viewBox="0 0 ${totalW} ${ch}" xmlns="http://www.w3.org/2000/svg">`;
-  chars.forEach((char, idx) => {
-    const ox = idx * (cw + gap) + 3;
-    const segs = SEG_MAP[char] || '';
-    if (char === ':') {
-      const cx = ox + 6;
-      svg += `<rect x="${cx}" y="13" width="5" height="5" rx="1.2" fill="${on}"/>`;
-      svg += `<rect x="${cx}" y="28" width="5" height="5" rx="1.2" fill="${on}"/>`;
-      return;
-    }
-    if (char === '.') {
-      svg += `<rect x="${ox+3}" y="${ch-7}" width="5" height="5" rx="1.2" fill="${on}"/>`;
-      return;
-    }
-    if (char === ' ') return;
-    const m = 1.5;
-    const top = 2, mid = ch / 2, bot = ch - 2;
-    function sx(x, y) { return x + (mid - y) / mid * sk; }
-    function hSeg(l, r, y) {
-      const hl = tw / 2;
-      return `${sx(l+m+hl,y)},${y} ${sx(l+m+tw,y-hl)},${y-hl} ${sx(r-m-tw,y-hl)},${y-hl} ${sx(r-m-hl,y)},${y} ${sx(r-m-tw,y+hl)},${y+hl} ${sx(l+m+tw,y+hl)},${y+hl}`;
-    }
-    function vSeg(x, y1, y2) {
-      const hl = tw / 2;
-      const ym = (y1 + y2) / 2;
-      return `${sx(x,y1+m)},${y1+m} ${sx(x+hl,y1+m+hl)},${y1+m+hl} ${sx(x+hl,ym)},${ym} ${sx(x+hl,y2-m-hl)},${y2-m-hl} ${sx(x,y2-m)},${y2-m} ${sx(x-hl,ym)},${ym}`;
-    }
-    const l = ox, r = ox + cw;
-    const S = {
-      a: hSeg(l, r, top), b: vSeg(r, top, mid), c: vSeg(r, mid, bot),
-      d: hSeg(l, r, bot), e: vSeg(l, mid, bot), f: vSeg(l, top, mid), g: hSeg(l, r, mid),
-    };
-    for (const [seg, pts] of Object.entries(S)) {
-      svg += `<polygon points="${pts}" fill="${off}" opacity="0.5"/>`;
-    }
-    for (const [seg, pts] of Object.entries(S)) {
-      if (segs.includes(seg)) svg += `<polygon points="${pts}" fill="${on}"/>`;
-    }
-  });
-  svg += '</svg>';
-  return svg;
+
+function playLgMelody(){
+  try{
+    var ctx=new(window.AudioContext||window.webkitAudioContext)();
+    // LG "The Lincolnshire Poacher" melody - square wave like piezo buzzer
+    var notes=[
+      {f:739.99,d:0.22},  // F#5
+      {f:830.61,d:0.22},  // G#5
+      {f:932.33,d:0.22},  // A#5
+      {f:830.61,d:0.22},  // G#5
+      {f:739.99,d:0.35},  // F#5
+      {f:622.25,d:0.35},  // D#5
+      {f:554.37,d:0.22},  // C#5
+      {f:622.25,d:0.22},  // D#5
+      {f:739.99,d:0.35},  // F#5
+      {f:739.99,d:0.22},  // F#5
+      {f:622.25,d:0.55},  // D#5 (long)
+      {f:0,d:0.3},        // pause
+      {f:622.25,d:0.22},  // D#5
+      {f:739.99,d:0.22},  // F#5
+      {f:830.61,d:0.22},  // G#5
+      {f:739.99,d:0.22},  // F#5
+      {f:622.25,d:0.35},  // D#5
+      {f:554.37,d:0.35},  // C#5
+      {f:466.16,d:0.22},  // A#4
+      {f:554.37,d:0.22},  // C#5
+      {f:622.25,d:0.35},  // D#5
+      {f:622.25,d:0.22},  // D#5
+      {f:554.37,d:0.55},  // C#5 (long)
+    ];
+    var t=ctx.currentTime+0.1;
+    notes.forEach(function(n){
+      if(n.f>0){
+        var osc=ctx.createOscillator();
+        var gain=ctx.createGain();
+        osc.type='square';
+        osc.frequency.value=n.f;
+        gain.gain.setValueAtTime(0.08,t);
+        gain.gain.exponentialRampToValueAtTime(0.001,t+n.d-0.02);
+        osc.connect(gain);gain.connect(ctx.destination);
+        osc.start(t);osc.stop(t+n.d);
+      }
+      t+=n.d;
+    });
+    setTimeout(function(){ctx.close()},8000);
+  }catch(e){}
 }
 
-function render(){
-const s=gs(),prog=allDone?100:(dneS()/totS())*100,isOk=disp.startsWith('✓'),val=isOk?disp.slice(2):disp;
+function R(){
+const s=km?K[ks]:gs(),ad=km?kd:disp,prog=allDone?100:(dneS()/totS())*100,isOk=ad.startsWith('✓'),val=isOk?ad.slice(2):ad,cc=km?kc:cfd;
+function hl(id){if(!s)return'';if(s.hold&&(id==='hot'||id==='cold'))return'hw';if(s.cf&&!cc&&id==='start')return'';if(s.hl?.includes(id))return'hl';return''}
+function bd(id){if(!s)return'';if(s.hold&&(id==='hot'||id==='cold'))return'<div class="hl-badge wb">👆 SEGURE</div>';if(s.cf&&!cc&&id==='start')return'';if(s.hl?.includes(id))return id==='start'?'<div class="hl-badge" style="background:var(--green)">👆 APERTE</div>':'<div class="hl-badge">👆 APERTE</div>';return''}
+let ck='';
+if(s&&s.cf&&!cc){const f1=km?'kcf':'cfm',f2=km?'kdn':'deny',hi=km?'kch':'ckh';
+ck=`<div class="ckpt"><div class="ckpt-title">⚠️ VERIFIQUE NA SUA MÁQUINA</div><div class="ckpt-msg">Confira se o display está mostrando:</div><div class="ckpt-code">${s.cf}</div><div class="ckpt-btns"><button class="ckpt-yes" onclick="${f1}()">✅ Sim, está!</button><button class="ckpt-no" onclick="${f2}()">❌ Não encontrei</button></div><div class="ckpt-help" id="${hi}">Continue pressionando <b>Morno</b> (▲) ou <b>Frio</b> (▼) na máquina até encontrar <b>${s.cf}</b>. O menu é circular.</div></div>`}
+let g='';
+if(km&&kDone){g='<div class="gc" style="border-color:var(--green)"><div class="cmp"><div class="ic">✅</div><h2>Cancelamento de ciclo concluído com sucesso!</h2></div><button class="rb" onclick="exk()">← Voltar ao tutorial principal</button></div>';}
+else if(km){var vbtn=s.auto?'':'<button class="rb" style="margin-top:8px;color:var(--accent);border-color:var(--accent)" onclick="exk()">\u2190 Voltar ao tutorial</button>';g='<div class="gc" style="border-color:var(--accent)"><div class="gn" style="color:var(--accent)">Cancelar Ciclo \u2014 Passo '+(ks+1)+' de '+K.length+'</div><div class="gt">'+s.t+'</div><div class="gd">'+s.d+'</div><div class="ga '+(s.at==='green'?'gr':s.at==='warn'?'wr':'')+'">'+s.a+'</div>'+ck+vbtn+'</div>';}
+else if(allDone)g=`<div class="gc"><div class="cmp"><div class="ic">✅</div><h2>Configuração Completa!</h2><p><b>Pdtd = PAY</b> · <b>UEnd = CoIn</b> · <b>Co1 = 1000 (R$10,00)</b></p><button class="rb" onclick="rst()">Recomeçar</button></div></div>`;
+else if(s)g=`<div class="gc"><div class="gn">${T[cT].label} — Passo ${cS+1} de ${T[cT].steps.length}</div><div class="gt">${s.t}</div><div class="gd">${s.d}</div><div class="ga ${s.at==='green'?'gr':s.at==='warn'?'wr':''}">${s.a}</div>${ck}</div>`;
+
 document.getElementById('app').innerHTML=`
-
-<!-- COMPACT INSTRUCTION ON TOP -->
-<div class="guide-top">
-<div class="gc">${allDone?`<div class="cmp"><div class="ic">✅</div><h2>Configuração Completa!</h2><p>As 3 configurações foram realizadas com sucesso:<br><b>Pdtd = PAY</b> · <b>UEnd = Coin</b> · <b>Co1 = 1000 (R$10,00)</b></p><button class="rb" onclick="reset()">Recomeçar Tutorial</button></div>`:s?`<div class="gn">${T[cT].label} — Passo ${cS+1} de ${T[cT].steps.length}</div><div class="gt">${s.t}</div><div class="gd">${s.d}</div><div class="ga ${s.at==='green'?'gr':s.at==='warn'?'wr':''}"><span class="arrow">👆</span><span>${s.a}</span></div>${s.cf&&!confirmed?`
-<div class="ckpt">
-<div class="ckpt-title">⚠️ VERIFIQUE NA SUA MÁQUINA</div>
-<div class="ckpt-msg">Antes de apertar Iniciar, confira se o display da sua máquina está mostrando:</div>
-<div class="ckpt-code">${s.cf}</div>
-<div class="ckpt-msg">O display da sua máquina está mostrando este código?</div>
-<div class="ckpt-btns">
-<button class="ckpt-yes" onclick="confirmStep()">✅ Sim, está!</button>
-<button class="ckpt-no" onclick="denyStep()">❌ Não encontrei</button>
-</div>
-<div class="ckpt-help" id="ckpt-help">Continue pressionando o botão <b>Morno</b> (▲ Subir) ou <b>Frio</b> (▼ Descer) na sua máquina até o display mostrar <b>${s.cf}</b>. O menu é circular — se passar do código, continue apertando que ele aparecerá novamente.</div>
-</div>
-`:''}`:''}</div>
-</div>
-
-<!-- MACHINE PANEL BELOW -->
-<div class="machine-section">
+${g}
 <div class="mw"><div class="ml">Painel de Controle — LG Giant C</div>
 <div class="pnl">
-<div class="pl"><div class="plt">Processing</div>
-<div class="pr">
-<div class="pg">${WI}<div class="plds"><div class="pld"></div><div class="pld"></div></div><div class="plbl">Wash</div></div>
-<div class="parr">►</div>
-<div class="pg">${WI}<div class="plds"><div class="pld"></div><div class="pld"></div></div><div class="plbl">Rinse</div></div>
-<div class="parr">►</div>
-<div class="pg">${WI}<div class="plds"><div class="pld"></div><div class="pld"></div></div><div class="plbl">Spin</div></div>
-</div></div>
-
-<div class="pc"><div class="db">
-<div class="wi">${W}<span>Wi-Fi</span></div>
-<div class="ls"><div class="seg-display${isOk?' ok':''}">${segSVG(isOk?val:val,isOk)}</div><div class="mn">min</div></div>
-</div>
-<div class="dbot"><div class="dl"><div class="dle"></div>Door Lock</div><div style="font-size:.42rem;color:#aaa">EST. Time Remaining</div></div>
-</div>
-
-<div class="prr">
-<div class="bg"><div class="bgt">Botão de ciclo</div>
-<button class="cb ${hl('hot')}" onclick="hBtn('hot')">${badge('hot')}<div class="bb"></div><div class="bls"><div class="bm">Quente <span>(Hot)</span></div><div class="bs">1º Botão <span class="ft bk">← VOLTAR</span></div></div><div class="ba">▲</div></button>
-<button class="cb ${hl('warm')}" onclick="hBtn('warm')">${badge('warm')}<div class="bb"></div><div class="bls"><div class="bm">Morno <span>(Warm)</span></div><div class="bs">2º Botão <span class="ft up">▲ SUBIR</span></div></div><div class="ba">▼</div></button>
-<button class="cb ${hl('cold')}" onclick="hBtn('cold')">${badge('cold')}<div class="bb"></div><div class="bls"><div class="bm">Frio <span>(Cold)</span></div><div class="bs">3º Botão <span class="ft dn">▼ DESCER</span></div></div></button>
+<div class="pl"><div class="plt">Processing</div><div class="pr"><div class="pg">${WI}<div class="plds"><div class="pld"></div><div class="pld"></div></div><div class="plbl">Wash</div></div><div class="parr">►</div><div class="pg">${WI}<div class="plds"><div class="pld"></div><div class="pld"></div></div><div class="plbl">Rinse</div></div><div class="parr">►</div><div class="pg">${WI}<div class="plds"><div class="pld"></div><div class="pld"></div></div><div class="plbl">Spin</div></div></div></div>
+<div class="pc"><div class="db"><div class="wi">${WF}<span>Wi-Fi</span></div><div class="ls"><div class="seg-display${isOk?' ok':''}${s&&s.blink?' blink':''}">${seg(val,isOk)}</div><div class="mn">min</div></div></div><div class="dbot"><span>Door Lock</span><span>EST. Time Remaining</span></div></div>
+<div class="prr"><div class="bg"><div class="bgt">Botão de ciclo</div>
+<button class="cb ${hl('hot')}" onclick="hB('hot')">${bd('hot')}<div class="bb"></div><div class="bls"><div class="bm">Quente <span>(Hot)</span></div><div class="bs">1º Botão <span class="ft bk">← VOLTAR</span></div></div><div class="ba">▲</div></button>
+<button class="cb ${hl('warm')}" onclick="hB('warm')">${bd('warm')}<div class="bb"></div><div class="bls"><div class="bm">Morno <span>(Warm)</span></div><div class="bs">2º Botão <span class="ft up">▲ SUBIR</span></div></div><div class="ba">▼</div></button>
+<button class="cb ${hl('cold')}" onclick="hB('cold')">${bd('cold')}<div class="bb"></div><div class="bls"><div class="bm">Frio <span>(Cold)</span></div><div class="bs">3º Botão <span class="ft dn">▼ DESCER</span></div></div></button>
 <button class="cb dis"><div class="bb"></div><div class="bls"><div class="bm">Delicados <span>(Delicates)</span></div><div class="bs">4º Botão</div></div></button>
-</div>
-<div class="sa">
-<button class="sb ${hl('start')}" onclick="hStart()">${badge('start')}<div class="bb"></div><div class="bls"><div class="bm">Iniciar / Pausar <span>(Start)</span></div><div class="bs"><span class="ft ok">✓ OK</span></div></div></button>
-<div class="cpg">Add Super<br>Wash</div>
-</div>
-${s?.hold?'<div class="ho sh"><button class="hb" onclick="hHold()">🔒 Simular: Segurar Quente + Frio por 5 segundos</button></div>':''}
-</div>
-</div></div>
-</div>
-
-<!-- TABS + PROGRESS BELOW PANEL -->
-<div class="guide-tabs">
-<div class="tabs">${T.map((t,i)=>{let c='tab';if(done.has(i))c+=' dn';else if(i===cT&&!allDone)c+=' ac';return`<button class="${c}" onclick="selT(${i})">${done.has(i)?'\u2713 ':''}${t.label}</button>`}).join('')}</div>
-<div class="pb"><div class="pf" style="width:${prog}%"></div></div>
-</div>`;
-
-}
-render();
+</div><div class="sa"><button class="sb ${hl('start')}" onclick="hS()">${bd('start')}<div class="bb"></div><div class="bls"><div class="bm">Iniciar / Pausar <span>(Start)</span></div><div class="bs"><span class="ft ok">✓ OK</span></div></div></button><div class="cpg">Add Super<br>Wash</div></div>
+${s&&s.hold?'<div class="ho sh"><button class="hb" onclick="hH()">🔒 Segurar Quente + Frio por 5 segundos</button></div>':''}
+</div></div></div>
+${!km?`<div><div class="tabs">${T.map((t,i)=>{let c='tab';if(done.has(i))c+=' dn';else if(i===cT&&!allDone)c+=' ac';return`<button class="${c}" onclick="selT(${i})">${done.has(i)?'✓ ':''}${t.label}</button>`}).join('')}</div><div class="pb"><div class="pf" style="width:${prog}%"></div></div></div>
+<div class="ext-hdr" onclick="tge()"><span style="font-size:.9rem;font-weight:700;color:var(--dim)">🔧 Outras Opções</span><span style="color:var(--dim)">${eo?'▲':'▼'}</span></div>
+<div class="ext-body${eo?' open':''}"><div class="ext-card"><h3>🚫 Cancelar um Ciclo</h3><p>Cancela um ciclo que está rodando. Útil quando a máquina travou ou precisa retirar roupas.</p><button class="ext-btn" onclick="skm()">Iniciar tutorial de cancelamento</button></div></div>`:''}`}
+R();
 </script>
 </body>
 </html>
