@@ -115,6 +115,19 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
 .hb:active{filter:brightness(.9);transform:scale(.97)}
 
 
+
+.ckpt{background:#1a1520;border:2px solid var(--warn);border-radius:10px;padding:14px;margin-bottom:8px;text-align:center}
+.ckpt-title{font-size:.95rem;font-weight:700;color:var(--warn);margin-bottom:8px}
+.ckpt-code{font-family:'JetBrains Mono',monospace;font-size:1.4rem;font-weight:700;color:#44ee55;background:#111;padding:8px 20px;border-radius:8px;display:inline-block;margin:8px 0;letter-spacing:2px}
+.ckpt-msg{font-size:.85rem;color:var(--dim);margin-bottom:12px;line-height:1.5}
+.ckpt-btns{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+.ckpt-yes{padding:12px 24px;border-radius:8px;border:2px solid var(--green);background:rgba(46,204,64,.12);color:var(--green);font-family:'DM Sans',sans-serif;font-size:.9rem;font-weight:700;cursor:pointer;min-width:140px}
+.ckpt-yes:active{transform:scale(.95)}
+.ckpt-no{padding:12px 24px;border-radius:8px;border:2px solid var(--accent);background:rgba(255,65,54,.08);color:var(--accent);font-family:'DM Sans',sans-serif;font-size:.9rem;font-weight:700;cursor:pointer;min-width:140px}
+.ckpt-no:active{transform:scale(.95)}
+.ckpt-help{display:none;margin-top:10px;padding:10px;background:rgba(255,65,54,.08);border:1px solid rgba(255,65,54,.2);border-radius:8px;font-size:.82rem;color:var(--dim);line-height:1.5;text-align:left}
+.ckpt-help b{color:#fff}
+
 /* Flash feedback */
 @keyframes flash{0%{opacity:1}50%{opacity:.3}100%{opacity:1}}
 .flash{animation:flash .2s ease-out}
@@ -145,45 +158,48 @@ const T=[
 ]},
 {id:'pdtd',label:'Seção 1: PAY',steps:[
 {t:'Navegar até t4PE',d:'Estamos no submenu (<code>r9Pr</code>). Pressione <b>Morno</b> ou <b>Frio</b> várias vezes até encontrar <code>t4PE</code>.',a:'Pressione <b>Morno</b> (▲) até aparecer <b>t4PE</b>',at:'',hl:['warm'],td:'t4PE'},
-{t:'Entrar em t4PE',d:'O display mostra <code>t4PE</code>. Pressione <b>Iniciar</b> para entrar.',a:'Pressione <b>Iniciar</b> (OK)',at:'green',hl:['start'],td:'Pdtd'},
+{t:'Entrar em t4PE',d:'O display mostra <code>t4PE</code>. Pressione <b>Iniciar</b> para entrar.',a:'Pressione <b>Iniciar</b> (OK)',at:'green',hl:['start'],td:'Pdtd',cf:'t4PE'},
 {t:'Abrir Pdtd',d:'O display mostra <code>Pdtd</code> (Tipo de Produto). Pressione <b>Iniciar</b> para ver o valor atual.',a:'Pressione <b>Iniciar</b> (OK)',at:'green',hl:['start'],td:'FrEE'},
 {t:'Selecionar PAY',d:'O display mostra <code>FrEE</code> (gratuito). Pressione <b>Morno</b> para mudar para <code>PAY</code>.',a:'Pressione <b>Morno</b> (▲) para selecionar <b>PAY</b>',at:'',hl:['warm'],td:'PAY'},
-{t:'Confirmar PAY ✓',d:'O display mostra <code>PAY</code>. Pressione <b>Iniciar</b> para salvar.',a:'Pressione <b>Iniciar</b> (OK) para salvar',at:'green',hl:['start'],td:'✓ PAY'},
+{t:'Confirmar PAY ✓',d:'O display mostra <code>PAY</code>. Pressione <b>Iniciar</b> para salvar.',a:'Pressione <b>Iniciar</b> (OK) para salvar',at:'green',hl:['start'],td:'✓ PAY',cf:'PAY'},
 ]},
 {id:'uend',label:'Seção 2: Coin',steps:[
 {t:'Passar por Pdtd',d:'Configuração PAY salva! Continuamos dentro de <code>t4PE</code>. O display mostra <code>Pdtd</code> (já configurado). Avance até <code>UEnd</code>.',a:'Pressione <b>Morno</b> (▲) para avançar',at:'',hl:['warm'],td:'Loc1',sd:'Pdtd'},
 {t:'Passar por Loc1',d:'O display mostra <code>Loc1</code> (Tipo de unidade monetária). Não é este. Continue avançando.',a:'Pressione <b>Morno</b> (▲) para avançar',at:'',hl:['warm'],td:'UEnd'},
-{t:'Encontramos UEnd!',d:'O display mostra <code>UEnd</code> (Tipo de Venda). <b>Este é o menu correto!</b> Pressione <b>Iniciar</b> para entrar.',a:'Pressione <b>Iniciar</b> (OK) para entrar',at:'green',hl:['start'],td:'CArd'},
+{t:'Encontramos UEnd!',d:'O display mostra <code>UEnd</code> (Tipo de Venda). <b>Este é o menu correto!</b> Pressione <b>Iniciar</b> para entrar.',a:'Pressione <b>Iniciar</b> (OK) para entrar',at:'green',hl:['start'],td:'CArd',cf:'UEnd'},
 {t:'Selecionar Coin',d:'O display mostra <code>CArd</code> (Cartão). Pressione <b>Morno</b> para mudar para <code>CoIn</code>.',a:'Pressione <b>Morno</b> (▲) para selecionar <b>CoIn</b> (Moeda)',at:'',hl:['warm'],td:'CoIn'},
-{t:'Confirmar Coin ✓',d:'O display mostra <code>CoIn</code>. Pressione <b>Iniciar</b> para salvar.',a:'Pressione <b>Iniciar</b> (OK) para salvar',at:'green',hl:['start'],td:'✓ CoIn'},
+{t:'Confirmar Coin ✓',d:'O display mostra <code>CoIn</code>. Pressione <b>Iniciar</b> para salvar.',a:'Pressione <b>Iniciar</b> (OK) para salvar',at:'green',hl:['start'],td:'✓ CoIn',cf:'CoIn'},
 ]},
 {id:'co1',label:'Seção 3: Valor',steps:[
 {t:'Voltar ao menu 5tUP',d:'Configuração CoIn salva! Pressione <b>Quente</b> (Voltar) para sair do t4PE e voltar ao menu 5tUP. Os itens <code>t4PE</code>, <code>Co1</code> e <code>r9Pr</code> estão todos neste mesmo nível.',a:'Pressione <b>Quente</b> (← Voltar)',at:'',hl:['hot'],td:'t4PE',sd:'UEnd'},
 {t:'Navegar até Co1',d:'Estamos no menu 5tUP (Setup). Pressione <b>Morno</b> ou <b>Frio</b> várias vezes até encontrar <code>Co1</code>.',a:'Pressione <b>Morno</b> (▲) até aparecer <b>Co1</b>',at:'',hl:['warm'],td:'Co1'},
-{t:'Entrar em Co1',d:'O display mostra <code>Co1</code> (Valor da moeda). Pressione <b>Iniciar</b> para ver o valor atual.',a:'Pressione <b>Iniciar</b> (OK)',at:'green',hl:['start'],td:'0100'},
+{t:'Entrar em Co1',d:'O display mostra <code>Co1</code> (Valor da moeda). Pressione <b>Iniciar</b> para ver o valor atual.',a:'Pressione <b>Iniciar</b> (OK)',at:'green',hl:['start'],td:'0100',cf:'Co1'},
 {t:'Ajustar para 1000',d:'Use <b>Morno</b> (▲) para aumentar até <code>1000</code> (= R$10,00). Na simulação, cada clique pula alguns valores.',a:'Pressione <b>Morno</b> (▲) até mostrar <b>1000</b>',at:'',hl:['warm'],td:'1000',mp:{b:'warm',n:5,s:['0200','0400','0600','0800','1000']}},
-{t:'Confirmar valor ✓',d:'O display mostra <code>1000</code> (R$10,00). Pressione <b>Iniciar</b> para salvar.',a:'Pressione <b>Iniciar</b> (OK) para salvar',at:'green',hl:['start'],td:'✓ 1000'},
+{t:'Confirmar valor ✓',d:'O display mostra <code>1000</code> (R$10,00). Pressione <b>Iniciar</b> para salvar.',a:'Pressione <b>Iniciar</b> (OK) para salvar',at:'green',hl:['start'],td:'✓ 1000',cf:'1000'},
 ]},
 {id:'exit',label:'Sair do Modo de Configuração',steps:[
 {t:'Voltar ao menu 5tUP',d:'Valor salvo! O display mostra <code>P1Po</code> (próximo item do menu). Pressione <b>Quente</b> (Voltar) para voltar ao menu 5tUP.',a:'Pressione <b>Quente</b> (← Voltar)',at:'',hl:['hot'],td:'5tUP',sd:'P1Po'},
 {t:'Sair do modo de configuração',d:'Estamos em <code>5tUP</code>. Pressione <b>Quente</b> (Voltar) para sair completamente. A máquina volta ao modo de espera.',a:'Pressione <b>Quente</b> (← Voltar) para sair',at:'',hl:['hot'],td:'PUSH'},
 ]},
 ];
-let cT=0,cS=0,disp='PUSH',pC=0,done=new Set(),allDone=false;
+let cT=0,cS=0,disp='PUSH',pC=0,done=new Set(),allDone=false,confirmed=false;
 function gs(){return allDone?null:T[cT]?.steps[cS]||null}
 function vib(ms){try{navigator.vibrate&&navigator.vibrate(ms||30)}catch(e){}}
 
 
-function adv(){vib(50);const t=T[cT];if(cS<t.steps.length-1){cS++;pC=0;const n=gs();if(n?.sd)disp=n.sd}else{done.add(cT);if(cT<T.length-1){cT++;cS=0;pC=0;const n=gs();if(n?.sd)disp=n.sd}else{allDone=true;disp='PUSH';vib([50,50,100])}}render()}
-function hBtn(id){const s=gs();if(!s||s.hold)return;vib(20);if(s.mp){if(id===s.mp.b){if(pC<s.mp.n-1){disp=s.mp.s[pC];pC++;render();return}else{disp=s.mp.s[s.mp.n-1];pC=0;adv();return}}return}if(!s.hl?.includes(id))return;disp=s.td;adv()}
+function adv(){vib(50);confirmed=false;const t=T[cT];if(cS<t.steps.length-1){cS++;pC=0;const n=gs();if(n?.sd)disp=n.sd}else{done.add(cT);if(cT<T.length-1){cT++;cS=0;pC=0;const n=gs();if(n?.sd)disp=n.sd}else{allDone=true;disp='PUSH';vib([50,50,100])}}render()}
+
+function confirmStep(){vib(30);confirmed=true;render();}
+function denyStep(){vib(20);const el=document.getElementById('ckpt-help');if(el)el.style.display='block';}
+function hBtn(id){const s=gs();if(!s||s.hold)return;if(s.cf&&!confirmed&&id==='start')return;vib(20);if(s.mp){if(id===s.mp.b){if(pC<s.mp.n-1){disp=s.mp.s[pC];pC++;render();return}else{disp=s.mp.s[s.mp.n-1];pC=0;adv();return}}return}if(!s.hl?.includes(id))return;disp=s.td;adv()}
 function hHold(){const s=gs();if(!s?.hold)return;vib([30,30,30,30,100]);disp=s.td;adv()}
 function hStart(){hBtn('start')}
-function selT(i){if(i>0&&!done.has(i-1))return;vib(20);cT=i;cS=0;pC=0;allDone=false;const s=gs();if(s?.sd)disp=s.sd;else if(i===0)disp='PUSH';render()}
-function reset(){vib(30);cT=0;cS=0;pC=0;disp='PUSH';done.clear();allDone=false;render()}
+function selT(i){if(i>0&&!done.has(i-1))return;vib(20);confirmed=false;cT=i;cS=0;pC=0;allDone=false;const s=gs();if(s?.sd)disp=s.sd;else if(i===0)disp='PUSH';render()}
+function reset(){vib(30);confirmed=false;cT=0;cS=0;pC=0;disp='PUSH';done.clear();allDone=false;render()}
 function totS(){return T.reduce((a,t)=>a+t.steps.length,0)}
 function dneS(){let d=0;for(let i=0;i<T.length;i++){if(done.has(i))d+=T[i].steps.length;else if(i===cT)d+=cS}return d}
-function hl(id){const s=gs();if(!s)return'';if(s.hold&&(id==='hot'||id==='cold'))return'hw';if(s.hl?.includes(id))return'hl';return''}
-function badge(id){const s=gs();if(!s)return'';if(s.hold&&(id==='hot'||id==='cold'))return'<div class="hl-badge warn-badge">👆 SEGURE AQUI</div>';if(s.hl?.includes(id)){const isStart=id==='start';return`<div class="hl-badge"${isStart?' style="background:var(--green)"':''}>👆 APERTE AQUI</div>`;}return'';}
+function hl(id){const s=gs();if(!s)return'';if(s.hold&&(id==='hot'||id==='cold'))return'hw';if(s.cf&&!confirmed&&id==='start')return'';if(s.hl?.includes(id))return'hl';return''}
+function badge(id){const s=gs();if(!s)return'';if(s.hold&&(id==='hot'||id==='cold'))return'<div class="hl-badge warn-badge">👆 SEGURE AQUI</div>';if(s.cf&&!confirmed&&id==='start')return'';if(s.hl?.includes(id)){const isStart=id==='start';return`<div class="hl-badge"${isStart?' style="background:var(--green)"':''}>👆 APERTE AQUI</div>`;}return'';}
 
 const W=`<svg viewBox="0 0 24 24"><path d="M12 18c-.55 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1zm-4.24-2.76a6.003 6.003 0 0 1 8.49 0l1.41-1.41a8.003 8.003 0 0 0-11.31 0l1.41 1.41zm-2.83-2.83a10.003 10.003 0 0 1 14.14 0l1.41-1.41c-4.69-4.69-12.28-4.69-16.97 0l1.42 1.41z"/></svg>`;
 const WI=`<svg viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="1.5"><rect x="5" y="5" width="14" height="14" rx="2"/><circle cx="12" cy="12" r="4"/><path d="M9 9l6 6M15 9l-6 6" stroke-width="1"/></svg>`;
@@ -254,7 +270,19 @@ document.getElementById('app').innerHTML=`
 
 <!-- COMPACT INSTRUCTION ON TOP -->
 <div class="guide-top">
-<div class="gc">${allDone?`<div class="cmp"><div class="ic">✅</div><h2>Configuração Completa!</h2><p>As 3 configurações foram realizadas com sucesso:<br><b>Pdtd = PAY</b> · <b>UEnd = Coin</b> · <b>Co1 = 1000 (R$10,00)</b></p><button class="rb" onclick="reset()">Recomeçar Tutorial</button></div>`:s?`<div class="gn">${T[cT].label} — Passo ${cS+1} de ${T[cT].steps.length}</div><div class="gt">${s.t}</div><div class="gd">${s.d}</div><div class="ga ${s.at==='green'?'gr':s.at==='warn'?'wr':''}"><span class="arrow">👆</span><span>${s.a}</span></div>`:''}</div>
+<div class="gc">${allDone?`<div class="cmp"><div class="ic">✅</div><h2>Configuração Completa!</h2><p>As 3 configurações foram realizadas com sucesso:<br><b>Pdtd = PAY</b> · <b>UEnd = Coin</b> · <b>Co1 = 1000 (R$10,00)</b></p><button class="rb" onclick="reset()">Recomeçar Tutorial</button></div>`:s?`<div class="gn">${T[cT].label} — Passo ${cS+1} de ${T[cT].steps.length}</div><div class="gt">${s.t}</div><div class="gd">${s.d}</div><div class="ga ${s.at==='green'?'gr':s.at==='warn'?'wr':''}"><span class="arrow">👆</span><span>${s.a}</span></div>${s.cf&&!confirmed?`
+<div class="ckpt">
+<div class="ckpt-title">⚠️ VERIFIQUE NA SUA MÁQUINA</div>
+<div class="ckpt-msg">Antes de apertar Iniciar, confira se o display da sua máquina está mostrando:</div>
+<div class="ckpt-code">${s.cf}</div>
+<div class="ckpt-msg">O display da sua máquina está mostrando este código?</div>
+<div class="ckpt-btns">
+<button class="ckpt-yes" onclick="confirmStep()">✅ Sim, está!</button>
+<button class="ckpt-no" onclick="denyStep()">❌ Não encontrei</button>
+</div>
+<div class="ckpt-help" id="ckpt-help">Continue pressionando o botão <b>Morno</b> (▲ Subir) ou <b>Frio</b> (▼ Descer) na sua máquina até o display mostrar <b>${s.cf}</b>. O menu é circular — se passar do código, continue apertando que ele aparecerá novamente.</div>
+</div>
+`:''}`:''}</div>
 </div>
 
 <!-- MACHINE PANEL BELOW -->
