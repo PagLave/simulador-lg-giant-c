@@ -148,23 +148,23 @@ let km=false,ks=0,kd='PUSH',kc=false,eo=false,kDone=false,tmr=null,tmrSec=2700;
 function gs(){return allDone?null:T[cT]?.steps[cS]||null}
 function vib(m){try{navigator.vibrate&&navigator.vibrate(m||30)}catch(e){}}
 function adv(){vib(50);cfd=false;const t=T[cT];if(cS<t.steps.length-1){cS++;pC=0;const n=gs();if(n?.sd)disp=n.sd}else{done.add(cT);if(cT<T.length-1){cT++;cS=0;pC=0;const n=gs();if(n?.sd)disp=n.sd}else{allDone=true;disp='PUSH';vib([50,50,100])}}R()}
-function hB(id){if(km){kB(id);return}const s=gs();if(!s||s.hold)return;if(s.cf&&!cfd&&id==='start')return;vib(20);if(s.mp){if(id===s.mp.b){if(pC<s.mp.n-1){disp=s.mp.s[pC];pC++;R();return}else{disp=s.mp.s[s.mp.n-1];pC=0;adv();return}}return}if(!s.hl?.includes(id))return;disp=s.td;adv()}
+function hB(id){if(km){kB(id);return}const s=gs();if(!s||s.hold)return;if(s.cf&&!cfd&&id==='start')return;vib(20);if(s.mp){if(id===s.mp.b){beepNav();if(pC<s.mp.n-1){disp=s.mp.s[pC];pC++;R();return}else{disp=s.mp.s[s.mp.n-1];pC=0;adv();return}}return}if(!s.hl?.includes(id))return;if(id==='start')beepOk();else beepNav();disp=s.td;adv()}
 function hH(){if(km){kH();return}const s=gs();if(!s?.hold)return;vib([30,30,30,30,100]);disp=s.td;adv()}
 function hS(){hB('start')}
 function cfm(){vib(30);cfd=true;R()}
-function deny(){vib(20);var e=document.getElementById('ckh');if(e)e.style.display='block'}
+function deny(){beepErr();vib(20);var e=document.getElementById('ckh');if(e)e.style.display='block'}
 function selT(i){if(i>0&&!done.has(i-1))return;vib(20);cfd=false;cT=i;cS=0;pC=0;allDone=false;const s=gs();if(s?.sd)disp=s.sd;else if(i===0)disp='PUSH';R()}
 function rst(){vib(30);cfd=false;cT=0;cS=0;pC=0;disp='PUSH';done.clear();allDone=false;R()}
 function totS(){return T.reduce((a,t)=>a+t.steps.length,0)}
 function dneS(){let d=0;for(let i=0;i<T.length;i++){if(done.has(i))d+=T[i].steps.length;else if(i===cT)d+=cS}return d}
-function kB(id){const s=K[ks];if(!s||s.hold)return;if(s.cf&&!kc&&id==='start')return;vib(20);if(s.mp){if(id===s.mp.b){if(pC<s.mp.n-1){kd=s.mp.s[pC];pC++;R();return}else{kd=s.mp.s[s.mp.n-1];pC=0;kA();return}}return}if(!s.hl?.includes(id))return;if(!s.tmr)kd=s.td;kA()}
-function kH(){const s=K[ks];if(!s?.hold)return;vib([30,30,30,30,100]);kd=s.td;kA()}
+function kB(id){const s=K[ks];if(!s||s.hold)return;if(s.cf&&!kc&&id==='start'){beepErr();return;}vib(20);if(s.mp){if(id===s.mp.b){beepNav();if(pC<s.mp.n-1){kd=s.mp.s[pC];pC++;R();return}else{kd=s.mp.s[s.mp.n-1];pC=0;kA();return}}return}if(!s.hl?.includes(id))return;if(id==='start')beepOk();else beepNav();if(!s.tmr)kd=s.td;kA()}
+function kH(){const s=K[ks];if(!s?.hold)return;beepHold();vib([30,30,30,30,100]);kd=s.td;kA()}
 function startTmr(){tmrSec=2700;updTmr();tmr=setInterval(function(){tmrSec--;if(tmrSec<=0){tmrSec=0;clearInterval(tmr);tmr=null;}updTmr()},1000);}
 function stopTmr(){if(tmr){clearInterval(tmr);tmr=null;}}
 function updTmr(){var m=Math.floor(tmrSec/60),s=tmrSec%60;kd=(m<10?'0':'')+m+':'+(s<10?'0':'')+s;var el=document.querySelector('.seg-display');if(el)el.innerHTML=seg(kd,false);}
 function kA(){vib(50);kc=false;pC=0;stopTmr();if(ks<K.length-1){ks++;var step=K[ks];if(step&&step.tmr){startTmr();R();return;}if(step&&step.auto){playLgMelody();R();setTimeout(function(){kd='PUSH';kDone=true;vib([50,50,100]);R()},3000);return;}}else{km=false;ks=0;kd='PUSH';}R()}
-function kcf(){vib(30);kc=true;R()}
-function kdn(){vib(20);var e=document.getElementById('kch');if(e)e.style.display='block'}
+function kcf(){beepOk();vib(30);kc=true;R()}
+function kdn(){beepErr();vib(20);var e=document.getElementById('kch');if(e)e.style.display='block'}
 function skm(){km=true;ks=0;kd='PUSH';kc=false;pC=0;vib(30);R()}
 function exk(){stopTmr();km=false;ks=0;kd='PUSH';kc=false;kDone=false;vib(20);R()}
 function tge(){eo=!eo;vib(20);R()}
@@ -187,6 +187,27 @@ for(const[k,p]of Object.entries(S))if(sg.includes(k))v+=`<polygon points="${p}" 
 const WF='<svg viewBox="0 0 24 24"><path d="M12 18c-.55 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1zm-4.24-2.76a6 6 0 018.49 0l1.41-1.41a8 8 0 00-11.31 0l1.41 1.41zm-2.83-2.83a10 10 0 0114.14 0l1.41-1.41c-4.69-4.69-12.28-4.69-16.97 0l1.42 1.41z"/></svg>';
 const WI='<svg viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="1.5"><rect x="5" y="5" width="14" height="14" rx="2"/><circle cx="12" cy="12" r="4"/></svg>';
 
+
+
+var audioCtx=null;
+function getCtx(){if(!audioCtx)audioCtx=new(window.AudioContext||window.webkitAudioContext)();return audioCtx;}
+function beep(freq,dur){
+  try{
+    var ctx=getCtx();
+    var osc=ctx.createOscillator();
+    var gain=ctx.createGain();
+    osc.type='square';
+    osc.frequency.value=freq||2400;
+    gain.gain.setValueAtTime(0.06,ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.001,ctx.currentTime+(dur||0.08));
+    osc.connect(gain);gain.connect(ctx.destination);
+    osc.start(ctx.currentTime);osc.stop(ctx.currentTime+(dur||0.08));
+  }catch(e){}
+}
+function beepOk(){beep(2800,0.06);setTimeout(function(){beep(3200,0.06)},70);}
+function beepNav(){beep(2400,0.05);}
+function beepHold(){beep(1800,0.15);setTimeout(function(){beep(2200,0.1)},160);}
+function beepErr(){beep(800,0.15);}
 
 function playLgMelody(){
   try{
@@ -264,7 +285,7 @@ ${s&&s.hold?'<div class="ho sh"><button class="hb" onclick="hH()">🔒 Segurar Q
 </div></div></div>
 ${!km?`<div><div class="tabs">${T.map((t,i)=>{let c='tab';if(done.has(i))c+=' dn';else if(i===cT&&!allDone)c+=' ac';return`<button class="${c}" onclick="selT(${i})">${done.has(i)?'✓ ':''}${t.label}</button>`}).join('')}</div><div class="pb"><div class="pf" style="width:${prog}%"></div></div></div>
 <div class="ext-hdr" onclick="tge()"><span style="font-size:.9rem;font-weight:700;color:var(--dim)">🔧 Outras Opções</span><span style="color:var(--dim)">${eo?'▲':'▼'}</span></div>
-<div class="ext-body${eo?' open':''}"><div class="ext-card"><h3>🚫 Cancelar um Ciclo</h3><p>Cancela um ciclo que está rodando. Útil quando a máquina travou ou precisa retirar roupas.</p><button class="ext-btn" onclick="skm()">Iniciar tutorial de cancelamento</button></div></div>`:''}`}
+<div class="ext-body${eo?' open':''}"><div class="ext-card"><h3>🚫 Cancelar um Ciclo</h3><p>Cancela um ciclo que foi liberado. Útil para quando liberou um ciclo de teste, e não deseja usá-lo.</p><button class="ext-btn" onclick="skm()">Iniciar tutorial de cancelamento</button></div></div>`:''}`}
 R();
 </script>
 </body>
